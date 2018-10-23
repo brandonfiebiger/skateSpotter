@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
-import { Route, NativeRouter } from 'react-router-native';
-import { Home } from './src/components/Home/Home';
+import { Route, NativeRouter, withRouter } from 'react-router-native';
+import  Home from './src/components/Home/Home';
+import  SpotMap from './src/components/SpotMap/SpotMap';
 
 export default class App extends Component {
   render() {
@@ -9,6 +10,7 @@ export default class App extends Component {
       <NativeRouter>
         <View style={styles.container}>
           <Route exact path="/" component={ Home }/>
+          <Route exact path="/SpotMap" component={ SpotMap } />
         </View>
       </NativeRouter>
     );
