@@ -1,23 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import { withRouter } from 'react-router-native';
 
-export const Home = (props) => {
+export class Home extends Component {
+  routeToMap = () => {
+    this.props.history.push('/SpotMap');
+  };
 
-  const routeToMap = () => {
-    // this.props.history.push('/SpotMap')
-    console.log(this.props)
-  } 
-
-
-
-  return(
-    <View>
-      <Text>SkateSpotter</Text>
-      <Button title="Spots Near Me!" onPress={routeToMap}>Spots Near Me!</Button>
-      <Button title="Login">Login</Button>
-    </View>
-  )
+  render() {
+    return (
+      <View>
+        <Text>SkateSpotter</Text>
+        <Button title="Spots Near Me!" onPress={this.routeToMap}>
+          Spots Near Me!
+        </Button>
+        <Button title="Login">Login</Button>
+      </View>
+    );
+  }
 }
 
-export default withRouter(Home)
+export default withRouter(Home);
