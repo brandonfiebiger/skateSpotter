@@ -5,7 +5,17 @@ import { addSpot } from '../../actions/spots';
 import { connect } from 'react-redux';
 
 export class Home extends Component {
-  routeToMap = () => {
+  constructor() {
+    super();
+    this.state = {
+      userLocation: null
+    };
+  }
+  handlePress = () => {
+    this.handleRouteToMap();
+  };
+
+  handleRouteToMap = () => {
     this.props.history.push('/SpotMap');
     this.props.addASpot('hello')
   };
@@ -15,10 +25,8 @@ export class Home extends Component {
     return (
       <View>
         <Text>SkateSpotter</Text>
-        <Button title="Spots Near Me!" onPress={this.routeToMap}>
-          Spots Near Me!
-        </Button>
-        <Button title="Login" >Login</Button>
+        <Button title="Spots Near Me!" onPress={this.handlePress} />
+        <Button title="Login" />
       </View>
     );
   }
