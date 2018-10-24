@@ -11,10 +11,6 @@ export class App extends Component {
     super();
   }
 
-  componentDidMount() {
-    console.log(this.props)
-  }
-
   render() {
     return (
       <NativeRouter>
@@ -47,7 +43,7 @@ const styles = StyleSheet.create({
 });
 
 export const mapStateToProps = state => ({
-  message: state.message
+  spots: state.spots
 })
 
 
