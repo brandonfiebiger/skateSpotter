@@ -1,19 +1,20 @@
 import React from 'react';
-import {AppRegistry} from 'react-native';
+import { AppRegistry } from 'react-native';
 import App from './App';
-import {name as appName} from './app.json';
+import { name as appName } from './app.json';
 import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { createStore, compose } from 'redux';
 import rootReducer from './src/store/reducers/index';
-import devToolsEnhancer from 'remote-redux-devtools';
 
+const devTools =
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
-const store = createStore(rootReducer, devToolsEnhancer());
+const store = createStore(rootReducer, compose(devTools));
 
 const ReduxStoreConnect = () => (
   <Provider store={store}>
     <App />
   </Provider>
-)
+);
 
 AppRegistry.registerComponent(appName, () => ReduxStoreConnect);
