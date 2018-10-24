@@ -7,9 +7,6 @@ import { connect } from 'react-redux';
 import { addSpot } from './src/store/actions';
 
 export class App extends Component {
-  constructor(props) {
-    super();
-  }
   render() {
     return (
       <NativeRouter>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CameraRoll from '../CameraRoll/CameraRoll';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { withRouter, Link } from 'react-router-native';
 import MapView from 'react-native-maps';
@@ -11,6 +12,7 @@ export class SpotMap extends Component {
   render() {
     return (
       <View style={styles.mapContainer}>
+        <CameraRoll />
         <Button title="Home" onPress={this.directToHome} />
         <MapView
           style={styles.map}
