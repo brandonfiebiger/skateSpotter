@@ -4,14 +4,14 @@ import { withRouter, Link } from 'react-router-native';
 import MapView from 'react-native-maps';
 
 export class SpotMap extends Component {
-  sendHome = () => {
+  directToHome = () => {
     this.props.history.push('/');
   };
 
   render() {
     return (
       <View style={styles.mapContainer}>
-        <Button title="Home" onPress={this.sendHome} />
+        <Button title="Home" onPress={this.directToHome} />
         <MapView
           style={styles.map}
           initialRegion={{
