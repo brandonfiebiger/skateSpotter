@@ -1,0 +1,1 @@
+export const ADD_SPOT = 'ADD_SPOT';
