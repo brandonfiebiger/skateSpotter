@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Route, NativeRouter, withRouter } from 'react-router-native';
+import { StyleSheet, View } from 'react-native';
+import { Route, NativeRouter } from 'react-router-native';
 import Home from './src/components/Home/Home';
 import SpotMap from './src/components/SpotMap/SpotMap';
 import { connect } from 'react-redux';
-import { addSpot } from './src/actions/spots'
+import { addSpot } from './src/store/actions';
 
 export class App extends Component {
   constructor(props) {
     super();
   }
-
   render() {
     return (
       <NativeRouter>
@@ -44,7 +43,9 @@ const styles = StyleSheet.create({
 
 export const mapStateToProps = state => ({
   spots: state.spots
-})
+});
 
-
-export default connect(mapStateToProps, null)(App);
+export default connect(
+  mapStateToProps,
+  null
+)(App);
