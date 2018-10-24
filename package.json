@@ -10,13 +10,16 @@
     "react": "16.6.0-alpha.8af6728",
     "react-native": "0.57.3",
     "react-native-maps": "^0.22.0",
-    "react-router-native": "^4.3.0"
+    "react-redux": "^5.0.7",
+    "react-router-native": "^4.3.0",
+    "redux": "^4.0.1"
   },
   "devDependencies": {
     "babel-jest": "23.6.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.48.1",
-    "react-test-renderer": "16.6.0-alpha.8af6728"
+    "react-test-renderer": "16.6.0-alpha.8af6728",
+    "remote-redux-devtools": "^0.5.13"
   },
   "jest": {
     "preset": "react-native"

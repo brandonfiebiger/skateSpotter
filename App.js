@@ -3,8 +3,14 @@ import { StyleSheet, Text, View } from 'react-native';
 import { Route, NativeRouter, withRouter } from 'react-router-native';
 import Home from './src/components/Home/Home';
 import SpotMap from './src/components/SpotMap/SpotMap';
+import { connect } from 'react-redux';
+import { addSpot } from './src/actions/spots'
 
-export default class App extends Component {
+export class App extends Component {
+  constructor(props) {
+    super();
+  }
+
   render() {
     return (
       <NativeRouter>
@@ -35,3 +41,10 @@ const styles = StyleSheet.create({
     marginBottom: 5
   }
 });
+
+export const mapStateToProps = state => ({
+  spots: state.spots
+})
+
+
+export default connect(mapStateToProps, null)(App);
