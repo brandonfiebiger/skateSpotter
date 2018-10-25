@@ -5,6 +5,7 @@ import Home from './src/components/Home/Home';
 import SpotMap from './src/components/SpotMap/SpotMap';
 import { connect } from 'react-redux';
 import { addSpot } from './src/store/actions';
+import CameraRoll from './src/components/CameraRoll/CameraRoll';
 
 export class App extends Component {
   render() {
@@ -13,6 +14,7 @@ export class App extends Component {
         <View style={styles.container}>
           <Route exact path="/" component={Home} />
           <Route exact path="/SpotMap" component={SpotMap} />
+          <Route exact path="/SpotIt" component={CameraRoll} />
         </View>
       </NativeRouter>
     );

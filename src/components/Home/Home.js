@@ -35,12 +35,21 @@ export class Home extends Component {
     );
   };
 
+  navToSpotIt = () => {
+    this.handleRouteToSpotIt();
+  }
+
+  handleRouteToSpotIt = () => {
+    this.props.history.push('/SpotIt')
+  }
+
   render() {
     return (
       <View>
         <Text>SkateSpotter</Text>
         <Button title="Spots Near Me!" onPress={() => this.handlePress()} />
         <Button title="Login" />
+        <Button title="Spot It!" onPress={this.navToSpotIt} />
       </View>
     );
   }
