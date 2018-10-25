@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import { View, Image, Button, StyleSheet } from 'react-native';
+import { View, Image, Button, StyleSheet, TextInput } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
-import t from 'tcomb-form-native';
-
-const Form = t.form.Form;
-
-const Spot = t.struct({
-  description: t.String,
-})
 
 class CameraRoll extends Component {
   constructor() {
     super();
     this.state = {
-      selectedImage: null
+      selectedImage: null,
+      description: {
+        value: '',
+        valid: false,
+        validationRules: {
+          isDescription: true
+        }
+      }
     };
   }
 
@@ -30,6 +30,10 @@ class CameraRoll extends Component {
       }
     });
   };
+
+  handleSubmit = () => {
+
+  }
   
   render() {
     console.log(this.state)
@@ -40,8 +44,8 @@ class CameraRoll extends Component {
           source={this.state.selectedImage}
         />
         <Button title="Take A Photo!" onPress={this.selectImageHandler} />
-        <Form type={Spot} />
-        
+        <TextInput style={styles.input}/>
+        <Button title="Add New Spot!" onPress={this.handleSubmit} />
       </View>
     );
   }
@@ -50,15 +54,27 @@ class CameraRoll extends Component {
 const styles = StyleSheet.create({
   view: {
     width: '100%',
-    height: 200,
-    marginTop: 20
+    height: 500,
+    marginTop: 20,
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: "column",
+    textAlign: 'center'
+
   },
   imageContainer: {
     width: '100%',
-    height: 300,
+    height: 200,
     borderRadius: 4,
     borderWidth: 0.5,
-    borderColor: 'black'
+    borderColor: 'black',
+  },
+  input: {
+    width: '80%',
+    height: 200,
+    marginTop: 20,
+    borderColor: 'black',
+    borderWidth: 0.5
   }
 });
 
