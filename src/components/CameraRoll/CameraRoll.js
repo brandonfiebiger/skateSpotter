@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Image, Button, StyleSheet, TextInput } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import validate from '../../utils/validation';
 
 class CameraRoll extends Component {
   constructor() {
@@ -11,7 +12,7 @@ class CameraRoll extends Component {
         value: '',
         valid: false,
         validationRules: {
-          isDescription: true
+          minLength: 20
         }
       }
     };
@@ -32,12 +33,17 @@ class CameraRoll extends Component {
   };
 
   updateInputState = (key, value) => {
-    this.setState({
-      [key]: {
-        value
+    this.setState((prevState => {
+      return {
+        [key]: {
+          ...prevState[key],
+          valid: validate(value, prevState[key].validationRules),
+          value
+          
+        }
       }
-    })
-    console.log(this.state.description.value);
+    }))
+    console.log(this.state.description.valid)
   }
 
   handleSubmit = () => {
