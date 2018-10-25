@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import { View, Image, Button, StyleSheet } from 'react-native';
 import ImagePicker from 'react-native-image-picker';
+import t from 'tcomb-form-native';
+
+const Form = t.form.Form;
+
+const Spot = t.struct({
+  description: t.String,
+})
 
 class CameraRoll extends Component {
   constructor() {
@@ -23,24 +30,32 @@ class CameraRoll extends Component {
       }
     });
   };
-
+  
   render() {
+    console.log(this.state)
     return (
-      <View>
+      <View style={styles.view}>
         <Image
           style={styles.imageContainer}
           source={this.state.selectedImage}
         />
-        <Button title="Select Image" onPress={this.selectImageHandler} />
+        <Button title="Take A Photo!" onPress={this.selectImageHandler} />
+        <Form type={Spot} />
+        
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  imageContainer: {
+  view: {
     width: '100%',
     height: 200,
+    marginTop: 20
+  },
+  imageContainer: {
+    width: '100%',
+    height: 300,
     borderRadius: 4,
     borderWidth: 0.5,
     borderColor: 'black'
