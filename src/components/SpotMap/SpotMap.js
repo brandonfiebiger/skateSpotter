@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import CameraRoll from '../CameraRoll/CameraRoll';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { withRouter, Link } from 'react-router-native';
+import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
 
 export class SpotMap extends Component {
@@ -10,6 +11,8 @@ export class SpotMap extends Component {
   };
 
   render() {
+    const { userLocation } = this.props;
+
     return (
       <View style={styles.mapContainer}>
         <CameraRoll />
@@ -22,7 +25,10 @@ export class SpotMap extends Component {
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421
           }}
-        />
+          region={userLocation}
+        >
+          {userLocation && <MapView.Marker coordinate={userLocation} />}
+        </MapView>
       </View>
     );
   }
@@ -40,4 +46,13 @@ const styles = StyleSheet.create({
   }
 });
 
-export default withRouter(SpotMap);
+export const mapStateToProps = state => ({
+  userLocation: state.userLocation
+});
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    null
+  )(SpotMap)
+);

@@ -1,4 +1,4 @@
-const spotReducer = (state = 'hello', action) => {
+export const spotReducer = (state = 'hello', action) => {
   switch (action.type) {
     case 'ADD_SPOT':
       console.log('it works');
@@ -6,5 +6,3 @@ const spotReducer = (state = 'hello', action) => {
       return state;
   }
 };
-
-export default spotReducer;
