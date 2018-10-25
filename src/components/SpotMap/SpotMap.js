@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import CameraRoll from '../CameraRoll/CameraRoll';
+import SpotForm from '../SpotForm/SpotForm';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { withRouter, Link } from 'react-router-native';
 import { connect } from 'react-redux';
@@ -15,7 +15,7 @@ export class SpotMap extends Component {
 
     return (
       <View style={styles.mapContainer}>
-        <CameraRoll />
+        <SpotForm />
         <Button title="Home" onPress={this.directToHome} />
         <MapView
           style={styles.map}
