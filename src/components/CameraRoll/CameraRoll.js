@@ -31,12 +31,20 @@ class CameraRoll extends Component {
     });
   };
 
+  updateInputState = (key, value) => {
+    this.setState({
+      [key]: {
+        value
+      }
+    })
+    console.log(this.state.description.value);
+  }
+
   handleSubmit = () => {
 
   }
   
   render() {
-    console.log(this.state)
     return (
       <View style={styles.view}>
         <Image
@@ -44,7 +52,7 @@ class CameraRoll extends Component {
           source={this.state.selectedImage}
         />
         <Button title="Take A Photo!" onPress={this.selectImageHandler} />
-        <TextInput style={styles.input}/>
+        <TextInput style={styles.input} value={this.state.description.value} onChangeText={(val) => this.updateInputState('description', val)}/>
         <Button title="Add New Spot!" onPress={this.handleSubmit} />
       </View>
     );
