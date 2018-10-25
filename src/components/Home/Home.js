@@ -11,16 +11,12 @@ export class Home extends Component {
       userLocation: null
     };
   }
-  handlePress = () => {
-    this.handleRouteToMap();
-    this.handleGetLocation();
-  };
 
   handleRouteToMap = () => {
     this.props.history.push('/SpotMap');
   };
 
-  handleGetLocation = () => {
+  componentDidMount() {
     navigator.geolocation.getCurrentPosition(
       position => {
         let location = {
@@ -33,21 +29,21 @@ export class Home extends Component {
       },
       err => console.log(err)
     );
-  };
+  }
 
   navToSpotIt = () => {
     this.handleRouteToSpotIt();
-  }
+  };
 
   handleRouteToSpotIt = () => {
-    this.props.history.push('/SpotIt')
-  }
+    this.props.history.push('/SpotIt');
+  };
 
   render() {
     return (
       <View>
         <Text>SkateSpotter</Text>
-        <Button title="Spots Near Me!" onPress={() => this.handlePress()} />
+        <Button title="Spots Near Me!" onPress={this.handleRouteToMap} />
         <Button title="Login" />
         <Button title="Spot It!" onPress={this.navToSpotIt} />
       </View>
