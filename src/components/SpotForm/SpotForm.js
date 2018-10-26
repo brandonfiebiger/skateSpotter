@@ -35,7 +35,7 @@ class SpotForm extends Component {
     });
   };
 
-  updateInputState = (key, value) => {
+  handleOnChange = (key, value) => {
     this.setState(prevState => {
       return {
         [key]: {
@@ -71,12 +71,12 @@ class SpotForm extends Component {
         <TextInput
           style={styles.input}
           value={this.state.name}
-          onChangeText={val => this.updateInputState('name', val)}
+          onChangeText={val => this.handleOnChange('name', val)}
         />
         <TextInput
           style={styles.input}
           value={this.state.description.value}
-          onChangeText={val => this.updateInputState('description', val)}
+          onChangeText={val => this.handleOnChange('description', val)}
         />
         <Button title="Add New Spot!" onPress={this.handleSubmit} />
       </View>
