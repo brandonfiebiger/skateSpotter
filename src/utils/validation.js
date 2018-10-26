@@ -3,7 +3,8 @@ const validate = (val, rules) => {
   for (let rule in rules) {
     switch (rule) {
       case 'minLength':
-        isValid = isValid && minLengthValidator(val, rules[rule])
+      isValid = minLengthValidator(val, rules[rule])
+      break;
       default:
         isValid = true;
     }
@@ -12,7 +13,11 @@ const validate = (val, rules) => {
 }
 
 const minLengthValidator = (val, minLength) => {
-  return val.length >= minLength;
+  if (val.length >= minLength) {
+    return true;
+  } else { 
+    return false;
+  }
 }
 
 export default validate;
