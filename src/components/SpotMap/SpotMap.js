@@ -15,8 +15,7 @@ export class SpotMap extends Component {
 
     return (
       <View style={styles.mapContainer}>
-        <SpotForm />
-        <Button title="Home" onPress={this.directToHome} />
+       <Button title="Home" onPress={this.directToHome} />
         <MapView
           style={styles.map}
           initialRegion={{
