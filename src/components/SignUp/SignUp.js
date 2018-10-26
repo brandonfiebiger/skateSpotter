@@ -28,7 +28,8 @@ class SignUp extends Component {
         validationRules: {
           equalTo: 'password'
         }
-      }
+      },
+      allValid: false
     }
   }
 
@@ -41,15 +42,29 @@ class SignUp extends Component {
           value
         }
       };
-    });
+    }, this.checkForAllValid);
+    this.checkForAllValid()
   };
+
+  checkForAllValid = () => {
+    const { email, password, passwordConfirmation } = this.state;
+    if (email.valid && password.valid && passwordConfirmation.valid) {
+      this.setState({
+        allValid: true
+      })
+    } else {
+      this.setState({
+        allValid: false
+      })
+    }
+  }
 
   render() {
     return (
       <View>
-        <TextInput value={this.state.email.value} onChangeText={val => this.handleOnChange('email', val)}/>
-        <TextInput value={this.state.password.value} onChangeText={val => this.handleOnChange('password', val)}/>
-        <TextInput value={this.state.passwordConfirmation.value} onChangeText={val => this.handleOnChange('passwordConfirmation', val)}/>
+        <TextInput value={this.state.email.value} onChangeText={val => this.handleOnChange('email', val)} placeholder="email"/>
+        <TextInput value={this.state.password.value} onChangeText={val => this.handleOnChange('password', val)} placeholder="password"/>
+        <TextInput value={this.state.passwordConfirmation.value} onChangeText={val => this.handleOnChange('passwordConfirmation', val)} placeholder="confirm password"/>
         <Button title="Sign Up" onPress={this.handleSubmit} />
       </View>
     )
