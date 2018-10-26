@@ -6,6 +6,7 @@ import SpotMap from './src/components/SpotMap/SpotMap';
 import { connect } from 'react-redux';
 import SpotForm from './src/components/SpotForm/SpotForm';
 import SignUp from './src/components/SignUp/SignUp';
+import { SpotContainer } from './src/components/SpotContainer/SpotContainer';
 
 export class App extends Component {
   render() {
@@ -16,6 +17,7 @@ export class App extends Component {
           <Route exact path="/SpotMap" component={SpotMap} />
           <Route exact path="/SpotIt" component={SpotForm} />
           <Route exact path="/SignUp" component={SignUp} />
+          <Route exact path="/SpotContainer" component={SpotContainer} />
         </View>
       </NativeRouter>
     );
