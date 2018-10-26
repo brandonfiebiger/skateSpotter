@@ -39,12 +39,16 @@ export class Home extends Component {
     this.props.history.push('/SpotIt');
   };
 
+  handleRouteToSignUp = () => {
+    this.props.history.push('/SignUp')
+  }
+
   render() {
     return (
       <View>
         <Text>SkateSpotter</Text>
         <Button title="Spots Near Me!" onPress={this.handleRouteToMap} />
-        <Button title="Login" />
+        <Button title="SignUp" onPress={this.handleRouteToSignUp}/>
         <Button title="Spot It!" onPress={this.navToSpotIt} />
       </View>
     );
