@@ -4,7 +4,6 @@ import { Route, NativeRouter } from 'react-router-native';
 import Home from './src/components/Home/Home';
 import SpotMap from './src/components/SpotMap/SpotMap';
 import { connect } from 'react-redux';
-import { addSpot } from './src/store/actions';
 import SpotForm from './src/components/SpotForm/SpotForm';
 import SignUp from './src/components/SignUp/SignUp';
 
@@ -27,8 +26,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
+    alignItems: 'center'
   },
   welcome: {
     fontSize: 20,
