@@ -46,6 +46,10 @@ export class Home extends Component {
     this.props.history.push('/SpotIt');
   };
 
+  handleRouteToSignUp = () => {
+    this.props.history.push('/SignUp')
+  }
+
   render() {
     return (
       <ImageBackground style={styles.homeContainer} source={SkateBackground}>

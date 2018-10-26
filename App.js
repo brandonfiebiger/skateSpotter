@@ -5,6 +5,7 @@ import Home from './src/components/Home/Home';
 import SpotMap from './src/components/SpotMap/SpotMap';
 import { connect } from 'react-redux';
 import SpotForm from './src/components/SpotForm/SpotForm';
+import SignUp from './src/components/SignUp/SignUp';
 
 export class App extends Component {
   render() {
@@ -14,6 +15,7 @@ export class App extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/SpotMap" component={SpotMap} />
           <Route exact path="/SpotIt" component={SpotForm} />
+          <Route exact path="/SignUp" component={SignUp} />
         </View>
       </NativeRouter>
     );
