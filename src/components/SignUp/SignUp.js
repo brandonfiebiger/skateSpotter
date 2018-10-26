@@ -37,7 +37,7 @@ class SignUp extends Component {
       return {
         [key]: {
           ...prevState[key],
-          valid: validate(value, prevState[key].validationRules),
+          valid: validate(value, prevState[key].validationRules, this.state.password.value),
           value
         }
       };
@@ -58,7 +58,7 @@ class SignUp extends Component {
 
 const styles = StyleSheet.create({
   input: {
-    
+
   }
 })
 
