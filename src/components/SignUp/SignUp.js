@@ -43,7 +43,6 @@ class SignUp extends Component {
         }
       };
     }, this.checkForAllValid);
-    this.checkForAllValid()
   };
 
   checkForAllValid = () => {
