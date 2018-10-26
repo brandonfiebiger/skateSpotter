@@ -59,13 +59,17 @@ class SignUp extends Component {
     }
   }
 
+  handleSubmit = () => {
+    console.log('it works');
+  }
+
   render() {
     return (
       <View>
         <TextInput value={this.state.email.value} onChangeText={val => this.handleOnChange('email', val)} placeholder="email"/>
         <TextInput value={this.state.password.value} onChangeText={val => this.handleOnChange('password', val)} placeholder="password"/>
         <TextInput value={this.state.passwordConfirmation.value} onChangeText={val => this.handleOnChange('passwordConfirmation', val)} placeholder="confirm password"/>
-        <Button title="Sign Up" onPress={this.handleSubmit} />
+        <Button title="Sign Up" onPress={this.handleSubmit} disabled={!this.state.allValid} />
       </View>
     )
   }
