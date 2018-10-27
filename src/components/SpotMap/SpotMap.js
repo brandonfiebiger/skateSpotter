@@ -4,6 +4,7 @@ import { Text, View, StyleSheet, Button } from 'react-native';
 import { withRouter, Link } from 'react-router-native';
 import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
+import SpotContainer from '../SpotContainer/SpotContainer';
 
 export class SpotMap extends Component {
   directToHome = () => {
@@ -12,6 +13,25 @@ export class SpotMap extends Component {
 
   render() {
     const { userLocation } = this.props;
+
+    let locations = [
+      {
+        latitude: 39.7392,
+        longitude: -104.9803,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421
+      },
+      {
+        latitude: 39.7592,
+        longitude: -105.0,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421
+      }
+    ];
+
+    const displayMarkers = locations.map((location, index) => (
+      <MapView.Marker coordinate={location} key={index} />
+    ));
 
     return (
       <View style={styles.mapContainer}>
@@ -27,7 +47,9 @@ export class SpotMap extends Component {
           region={userLocation}
         >
           {userLocation && <MapView.Marker coordinate={userLocation} />}
+          {displayMarkers}
         </MapView>
+        <SpotContainer />
       </View>
     );
   }
@@ -36,12 +58,12 @@ export class SpotMap extends Component {
 const styles = StyleSheet.create({
   mapContainer: {
     width: '100%',
-    height: 200,
+    height: '100%',
     marginTop: 20
   },
   map: {
     width: '100%',
-    height: '100%'
+    height: '60%'
   }
 });
 
