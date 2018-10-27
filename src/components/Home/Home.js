@@ -47,8 +47,8 @@ export class Home extends Component {
   };
 
   handleRouteToSignUp = () => {
-    this.props.history.push('/SignUp')
-  }
+    this.props.history.push('/SignUp');
+  };
 
   render() {
     return (
@@ -65,6 +65,13 @@ export class Home extends Component {
           <Button color="#f7f7f7" title="Login" />
         </TouchableHighlight>
         <TouchableHighlight style={styles.homeButton}>
+          <Button
+            color="#f7f7f7"
+            title="Sign Up"
+            onPress={this.handleRouteToSignUp}
+          />
+        </TouchableHighlight>
+        <TouchableHighlight style={styles.homeButton}>
           <Button color="#f7f7f7" title="Spot It!" onPress={this.navToSpotIt} />
         </TouchableHighlight>
       </ImageBackground>
@@ -79,6 +86,9 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     width: '100%'
+  },
+  homeContent: {
+    marginBottom: 20
   },
   homeHeader: {
     fontSize: 50,
