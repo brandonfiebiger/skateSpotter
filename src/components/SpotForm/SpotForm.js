@@ -19,8 +19,28 @@ class SpotForm extends Component {
           minLength: 20
         }
       },
-      name: ''
+      name: {
+        value: '',
+        valid: false,
+        validationRules: {
+          minLength: 6
+        }
+      },
+      allValid: false
     };
+  }
+
+  checkForAllValid = () => {
+    const { name, description, selectedImage } = this.state;
+    if (name.valid && description.valid && selectedImage) {
+      this.setState({
+        allValid: true
+      })
+    } else {
+      this.setState({
+        allValid: false
+      })
+    }
   }
 
   selectImageHandler = () => {
@@ -58,7 +78,7 @@ class SpotForm extends Component {
           value
         }
       };
-    });
+    }, this.checkForAllValid);
   };
 
   handleSubmit = () => {
@@ -92,7 +112,7 @@ class SpotForm extends Component {
           value={this.state.description.value}
           onChangeText={val => this.handleOnChange('description', val)}
         />
-        <Button title="Add New Spot!" onPress={this.handleSubmit} />
+        <Button title="Add New Spot!" onPress={this.handleSubmit} disabled={!this.state.allValid}/>
       </View>
     );
   }
