@@ -44,10 +44,7 @@ class SpotForm extends Component {
           successActionStatus: 201
         }
         RNS3.put(file, config)
-        .then(response => console.log(response))
-        this.setState({
-          selectedImage: { uri: response.uri }
-        });
+        .then(data=> this.setState({selectedImage: {uri: data.body.postResponse.location}}))
       }
     });
   };
