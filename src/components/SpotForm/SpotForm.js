@@ -3,7 +3,9 @@ import { View, Image, Button, StyleSheet, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { addSpot } from '../../store/actions';
 import ImagePicker from 'react-native-image-picker';
+import { RNS3 } from 'react-native-aws3';
 import validate from '../../utils/validation';
+import { accessKey, secretKey } from '../../utils/keys';
 
 class SpotForm extends Component {
   constructor() {
@@ -28,6 +30,21 @@ class SpotForm extends Component {
       } else if (response.error) {
         console.log('Error', response.error);
       } else {
+        const file = {
+          uri: response.uri,
+          name: response.fileName,
+          type: 'image/png'
+        }
+        const config = {
+          keyPrefix: 'skateSpotter/',
+          bucket: 'skatespots',
+          region: 'us-east-2',
+          accessKey,
+          secretKey,
+          successActionStatus: 201
+        }
+        RNS3.put(file, config)
+        .then(response => console.log(response))
         this.setState({
           selectedImage: { uri: response.uri }
         });
