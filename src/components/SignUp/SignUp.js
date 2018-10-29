@@ -75,13 +75,14 @@ class SignUp extends Component {
             style={email.valid ? [styles.input, styles.valid] : styles.input}
             value={email.value}
             onChangeText={val => this.handleOnChange('email', val)}
-            placeholder="email"
+            placeholder="Email"
           />
           <TextInput
             style={password.valid ? [styles.input, styles.valid] : styles.input}
             value={password.value}
             onChangeText={val => this.handleOnChange('password', val)}
-            placeholder="password"
+            type="password"
+            placeholder="Password"
           />
           <TextInput
             style={
@@ -93,7 +94,7 @@ class SignUp extends Component {
             onChangeText={val =>
               this.handleOnChange('passwordConfirmation', val)
             }
-            placeholder="confirm password"
+            placeholder="Confirm Password"
           />
           <Button
             title="Sign Up"
@@ -112,8 +113,7 @@ const styles = StyleSheet.create({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-around',
-    backgroundColor: 'blanchedalmond'
+    justifyContent: 'space-around'
   },
   input: {
     height: 30,
