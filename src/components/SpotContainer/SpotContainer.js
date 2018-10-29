@@ -15,7 +15,7 @@ export class SpotContainer extends Component {
     const { spots } = this.props;
 
     const cards = spots.map(spot => {
-      const image = spot.photos[0].url;
+      const image = spot.photos[0].url || spot.photos[0].uri;
 
       return (
         <SpotCard
