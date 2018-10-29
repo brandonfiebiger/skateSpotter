@@ -94,7 +94,7 @@ class SpotForm extends Component {
 
     this.props.addSpot({
       description: description.value,
-      image: [selectedImage],
+      photos: [selectedImage],
       name: name.value,
       latitude,
       longitude
