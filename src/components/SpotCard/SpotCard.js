@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { View, Button, Text, Image, StyleSheet } from 'react-native';
+import {
+  View,
+  Button,
+  Text,
+  Image,
+  StyleSheet,
+  TouchableHighlight
+} from 'react-native';
 
 export default class SpotCard extends Component {
   render() {
@@ -13,7 +20,10 @@ export default class SpotCard extends Component {
         <View style={styles.contentContainer}>
           <Text>{name}</Text>
           <Text>{description}</Text>
-          <Text>Distance From Me:</Text>
+          <Text>Distance From Me: 4 mi.</Text>
+          <TouchableHighlight style={styles.routeButton}>
+            <Button color="#f7f7f7" title="Route" />
+          </TouchableHighlight>
         </View>
       </View>
     );
@@ -35,11 +45,23 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
+    fontSize: 5,
+    justifyContent: 'space-around',
     height: '50%',
     width: '50%'
   },
   image: {
-    height: '50%',
+    height: '100%',
     width: '100%'
+  },
+  routeButton: {
+    backgroundColor: 'black',
+    borderRadius: 10,
+    height: 35,
+    marginLeft: 50,
+    opacity: 0.8,
+    paddingBottom: 5,
+    textAlignVertical: 'center',
+    width: 80
   }
 });

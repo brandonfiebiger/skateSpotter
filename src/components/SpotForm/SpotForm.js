@@ -30,18 +30,22 @@ class SpotForm extends Component {
     };
   }
 
+  directToHome = () => {
+    this.props.history.push('/');
+  };
+
   checkForAllValid = () => {
     const { name, description, selectedImage } = this.state;
     if (name.valid && description.valid && selectedImage) {
       this.setState({
         allValid: true
-      })
+      });
     } else {
       this.setState({
         allValid: false
-      })
+      });
     }
-  }
+  };
 
   selectImageHandler = () => {
     ImagePicker.showImagePicker({ title: 'Select an Image' }, response => {
@@ -54,7 +58,7 @@ class SpotForm extends Component {
           uri: response.uri,
           name: response.fileName,
           type: 'image/png'
-        }
+        };
         const config = {
           keyPrefix: 'skateSpotter/',
           bucket: 'skatespots',
@@ -62,9 +66,12 @@ class SpotForm extends Component {
           accessKey,
           secretKey,
           successActionStatus: 201
-        }
-        RNS3.put(file, config)
-        .then(data=> this.setState({selectedImage: {uri: data.body.postResponse.location}}))
+        };
+        RNS3.put(file, config).then(data =>
+          this.setState({
+            selectedImage: { uri: data.body.postResponse.location }
+          })
+        );
       }
     });
   };
@@ -87,7 +94,7 @@ class SpotForm extends Component {
 
     this.props.addSpot({
       description: description.value,
-      image: selectedImage,
+      image: [selectedImage],
       name: name.value,
       latitude,
       longitude
@@ -97,22 +104,29 @@ class SpotForm extends Component {
   render() {
     return (
       <View style={styles.view}>
+        <Button title="Home" onPress={this.directToHome} />
         <Image
           style={styles.imageContainer}
           source={this.state.selectedImage}
         />
-        <Button title="Take A Photo!" onPress={this.selectImageHandler} />
+        <Button title="Take A Photo" onPress={this.selectImageHandler} />
         <TextInput
-          style={styles.input}
+          style={styles.nameInput}
           value={this.state.name}
           onChangeText={val => this.handleOnChange('name', val)}
+          placeholder="Spot Name"
         />
         <TextInput
-          style={styles.input}
+          style={styles.description}
           value={this.state.description.value}
           onChangeText={val => this.handleOnChange('description', val)}
+          placeholder="Description"
         />
-        <Button title="Add New Spot!" onPress={this.handleSubmit} disabled={!this.state.allValid}/>
+        <Button
+          title="Add New Spot!"
+          onPress={this.handleSubmit}
+          disabled={!this.state.allValid}
+        />
       </View>
     );
   }
@@ -121,7 +135,7 @@ class SpotForm extends Component {
 const styles = StyleSheet.create({
   view: {
     width: '100%',
-    height: 500,
+    height: '90%',
     marginTop: 20,
     display: 'flex',
     alignItems: 'center',
@@ -130,14 +144,21 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     width: '100%',
-    height: 200,
+    height: 400,
     borderRadius: 4,
     borderWidth: 0.5,
     borderColor: 'black'
   },
-  input: {
+  description: {
     width: '80%',
     height: 80,
+    marginTop: 20,
+    borderColor: 'black',
+    borderWidth: 0.5
+  },
+  nameInput: {
+    width: '80%',
+    height: 40,
     marginTop: 20,
     borderColor: 'black',
     borderWidth: 0.5

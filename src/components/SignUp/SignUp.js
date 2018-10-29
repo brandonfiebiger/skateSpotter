@@ -6,39 +6,46 @@ import validate from '../../utils/validation';
 class SignUp extends Component {
   constructor() {
     super();
-
     this.state = {
       email: {
-        value: "",
+        value: '',
         valid: false,
         validationRules: {
           isEmail: true
         }
       },
       password: {
-        value: "",
+        value: '',
         valid: false,
         validationRules: {
           minLength: 6
         }
       },
       passwordConfirmation: {
-        value: "",
+        value: '',
         valid: false,
         validationRules: {
           equalTo: 'password'
         }
       },
       allValid: false
-    }
+    };
   }
+
+  directToHome = () => {
+    this.props.history.push('/');
+  };
 
   handleOnChange = (key, value) => {
     this.setState(prevState => {
       return {
         [key]: {
           ...prevState[key],
-          valid: validate(value, prevState[key].validationRules, this.state.password.value),
+          valid: validate(
+            value,
+            prevState[key].validationRules,
+            this.state.password.value
+          ),
           value
         }
       };
@@ -50,30 +57,53 @@ class SignUp extends Component {
     if (email.valid && password.valid && passwordConfirmation.valid) {
       this.setState({
         allValid: true
-      })
+      });
     } else {
       this.setState({
         allValid: false
-      })
+      });
     }
-  }
-
-  handleSubmit = () => {
-    console.log('it works');
-  }
+  };
 
   render() {
     const { email, password, passwordConfirmation, allValid } = this.state;
     return (
-      <View style={ styles.view }>
+      <View style={styles.view}>
         <View style={styles.textInputsContainer}>
-          <TextInput style={email.valid ? [styles.input, styles.valid] : styles.input } value={email.value} onChangeText={val => this.handleOnChange('email', val)} placeholder="email"/>
-          <TextInput style={password.valid ? [styles.input, styles.valid] : styles.input } value={password.value} onChangeText={val => this.handleOnChange('password', val)} placeholder="password"/>
-          <TextInput style={passwordConfirmation.valid ? [styles.input, styles.valid] : styles.input } value={passwordConfirmation.value} onChangeText={val => this.handleOnChange('passwordConfirmation', val)} placeholder="confirm password"/>
-          <Button title="Sign Up" onPress={this.handleSubmit} disabled={!allValid} />
+          <Button title="Home" onPress={this.directToHome} />
+          <TextInput
+            style={email.valid ? [styles.input, styles.valid] : styles.input}
+            value={email.value}
+            onChangeText={val => this.handleOnChange('email', val)}
+            placeholder="Email"
+          />
+          <TextInput
+            style={password.valid ? [styles.input, styles.valid] : styles.input}
+            value={password.value}
+            onChangeText={val => this.handleOnChange('password', val)}
+            type="password"
+            placeholder="Password"
+          />
+          <TextInput
+            style={
+              passwordConfirmation.valid
+                ? [styles.input, styles.valid]
+                : styles.input
+            }
+            value={passwordConfirmation.value}
+            onChangeText={val =>
+              this.handleOnChange('passwordConfirmation', val)
+            }
+            placeholder="Confirm Password"
+          />
+          <Button
+            title="Sign Up"
+            onPress={this.handleSubmit}
+            disabled={!allValid}
+          />
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -83,8 +113,7 @@ const styles = StyleSheet.create({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-around',
-    backgroundColor: 'blanchedalmond'
+    justifyContent: 'space-around'
   },
   input: {
     height: 30,
@@ -100,12 +129,12 @@ const styles = StyleSheet.create({
     height: '30%',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   valid: {
     borderColor: '#137B13',
     borderWidth: 2
   }
-})
+});
 
 export default SignUp;
