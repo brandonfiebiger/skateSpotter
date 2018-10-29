@@ -10,8 +10,6 @@ import { SpotContainer } from './src/components/SpotContainer/SpotContainer';
 import { populateSpots } from './src/store/actions';
 
 export class App extends Component {
-
-
   componentDidMount() {
     fetch('https://skate-spotter.herokuapp.com/api/v1/spots')
       .then(response => response.json())
@@ -58,7 +56,7 @@ export const mapStateToProps = state => ({
 
 export const mapDispatchToProps = dispatch => ({
   populateSpots: spots => dispatch(populateSpots(spots))
-})
+});
 
 export default connect(
   mapStateToProps,

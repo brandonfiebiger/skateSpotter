@@ -29,12 +29,12 @@ export class Home extends Component {
         let location = {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421
+          latitudeDelta: 12.0922,
+          longitudeDelta: 12.0421
         };
         this.props.getLocation(location);
       },
-      err => console.log(err)
+      error => console.log(error)
     );
   }
 
@@ -57,7 +57,7 @@ export class Home extends Component {
         <TouchableHighlight style={styles.homeButton}>
           <Button
             color="#f7f7f7"
-            title="Spots Near Me!"
+            title="Spots Near Me"
             onPress={this.handleRouteToMap}
           />
         </TouchableHighlight>
@@ -72,7 +72,7 @@ export class Home extends Component {
           />
         </TouchableHighlight>
         <TouchableHighlight style={styles.homeButton}>
-          <Button color="#f7f7f7" title="Spot It!" onPress={this.navToSpotIt} />
+          <Button color="#f7f7f7" title="Spot It" onPress={this.navToSpotIt} />
         </TouchableHighlight>
       </ImageBackground>
     );
