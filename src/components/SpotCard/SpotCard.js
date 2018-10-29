@@ -57,7 +57,8 @@ const styles = StyleSheet.create({
   routeButton: {
     backgroundColor: 'black',
     borderRadius: 10,
-    height: 30,
+    height: 35,
+    marginLeft: 50,
     opacity: 0.8,
     paddingBottom: 5,
     textAlignVertical: 'center',
