@@ -6,6 +6,7 @@ import SpotMap from './src/components/SpotMap/SpotMap';
 import { connect } from 'react-redux';
 import SpotForm from './src/components/SpotForm/SpotForm';
 import SignUp from './src/components/SignUp/SignUp';
+import Login from './src/components/Login/Login';
 import { SpotContainer } from './src/components/SpotContainer/SpotContainer';
 import { populateSpots } from './src/store/actions';
 
