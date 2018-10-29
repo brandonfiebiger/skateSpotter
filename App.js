@@ -7,8 +7,18 @@ import { connect } from 'react-redux';
 import SpotForm from './src/components/SpotForm/SpotForm';
 import SignUp from './src/components/SignUp/SignUp';
 import { SpotContainer } from './src/components/SpotContainer/SpotContainer';
+import { populateSpots } from './src/store/actions';
 
 export class App extends Component {
+
+
+  componentDidMount() {
+    fetch('https://skate-spotter.herokuapp.com/api/v1/spots')
+      .then(response => response.json())
+      .then(spots => this.props.populateSpots(spots))
+      .catch(error => console.log(error));
+  }
+
   render() {
     return (
       <NativeRouter>
@@ -46,7 +56,11 @@ export const mapStateToProps = state => ({
   spots: state.spots
 });
 
+export const mapDispatchToProps = dispatch => ({
+  populateSpots: spots => dispatch(populateSpots(spots))
+})
+
 export default connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(App);

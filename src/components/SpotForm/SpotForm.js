@@ -3,7 +3,9 @@ import { View, Image, Button, StyleSheet, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { addSpot } from '../../store/actions';
 import ImagePicker from 'react-native-image-picker';
+import { RNS3 } from 'react-native-aws3';
 import validate from '../../utils/validation';
+import { accessKey, secretKey } from '../../utils/keys';
 
 class SpotForm extends Component {
   constructor() {
@@ -17,8 +19,28 @@ class SpotForm extends Component {
           minLength: 20
         }
       },
-      name: ''
+      name: {
+        value: '',
+        valid: false,
+        validationRules: {
+          minLength: 6
+        }
+      },
+      allValid: false
     };
+  }
+
+  checkForAllValid = () => {
+    const { name, description, selectedImage } = this.state;
+    if (name.valid && description.valid && selectedImage) {
+      this.setState({
+        allValid: true
+      })
+    } else {
+      this.setState({
+        allValid: false
+      })
+    }
   }
 
   selectImageHandler = () => {
@@ -28,9 +50,21 @@ class SpotForm extends Component {
       } else if (response.error) {
         console.log('Error', response.error);
       } else {
-        this.setState({
-          selectedImage: { uri: response.uri }
-        });
+        const file = {
+          uri: response.uri,
+          name: response.fileName,
+          type: 'image/png'
+        }
+        const config = {
+          keyPrefix: 'skateSpotter/',
+          bucket: 'skatespots',
+          region: 'us-east-2',
+          accessKey,
+          secretKey,
+          successActionStatus: 201
+        }
+        RNS3.put(file, config)
+        .then(data=> this.setState({selectedImage: {uri: data.body.postResponse.location}}))
       }
     });
   };
@@ -44,7 +78,7 @@ class SpotForm extends Component {
           value
         }
       };
-    });
+    }, this.checkForAllValid);
   };
 
   handleSubmit = () => {
@@ -78,7 +112,7 @@ class SpotForm extends Component {
           value={this.state.description.value}
           onChangeText={val => this.handleOnChange('description', val)}
         />
-        <Button title="Add New Spot!" onPress={this.handleSubmit} />
+        <Button title="Add New Spot!" onPress={this.handleSubmit} disabled={!this.state.allValid}/>
       </View>
     );
   }
