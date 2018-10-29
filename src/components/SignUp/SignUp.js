@@ -81,7 +81,7 @@ class SignUp extends Component {
             style={password.valid ? [styles.input, styles.valid] : styles.input}
             value={password.value}
             onChangeText={val => this.handleOnChange('password', val)}
-            type="password"
+            secureTextEntry="true"
             placeholder="Password"
           />
           <TextInput
@@ -94,6 +94,7 @@ class SignUp extends Component {
             onChangeText={val =>
               this.handleOnChange('passwordConfirmation', val)
             }
+            secureTextEntry="true"
             placeholder="Confirm Password"
           />
           <Button
