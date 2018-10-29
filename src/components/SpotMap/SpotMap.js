@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import SpotForm from '../SpotForm/SpotForm';
 import { Text, View, StyleSheet, Button } from 'react-native';
 import { withRouter, Link } from 'react-router-native';
 import { connect } from 'react-redux';
@@ -12,26 +11,18 @@ export class SpotMap extends Component {
   };
 
   render() {
-    const { userLocation } = this.props;
+    const { userLocation, spots } = this.props;
 
-    let locations = [
-      {
-        latitude: 39.7392,
-        longitude: -104.9803,
+    const displayMarkers = spots.map((location, index) => {
+      const fullLocation = {
+        latitude: location.latitude,
+        longitude: location.longitude,
         latitudeDelta: 0.0922,
         longitudeDelta: 0.0421
-      },
-      {
-        latitude: 39.7592,
-        longitude: -105.0,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421
-      }
-    ];
+      };
 
-    const displayMarkers = locations.map((location, index) => (
-      <MapView.Marker coordinate={location} key={index} />
-    ));
+      return <MapView.Marker coordinate={fullLocation} key={index} />;
+    });
 
     return (
       <View style={styles.mapContainer}>
@@ -39,10 +30,10 @@ export class SpotMap extends Component {
         <MapView
           style={styles.map}
           initialRegion={{
-            latitude: 39.7392,
-            longitude: -104.9903,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421
+            latitude: 13.123456,
+            longitude: 42.456123,
+            latitudeDelta: 15.6922,
+            longitudeDelta: 15.6421
           }}
           region={userLocation}
         >
@@ -58,7 +49,7 @@ export class SpotMap extends Component {
 const styles = StyleSheet.create({
   mapContainer: {
     width: '100%',
-    height: '100%',
+    height: '95%',
     marginTop: 20
   },
   map: {
@@ -68,7 +59,8 @@ const styles = StyleSheet.create({
 });
 
 export const mapStateToProps = state => ({
-  userLocation: state.userLocation
+  userLocation: state.userLocation,
+  spots: state.spots
 });
 
 export default withRouter(
