@@ -1,23 +1,18 @@
 import React, { Component } from 'react';
 import { View, Button, Text, Image, StyleSheet } from 'react-native';
-import { connect } from 'react-redux';
-import SkateBackground from '../../assets/images/skate-spotter-home.png';
 
-export class SpotCard extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
+export default class SpotCard extends Component {
   render() {
+    const { name, description, image } = this.props;
+
     return (
       <View style={styles.card}>
         <View style={styles.imageContainer}>
-          <Image style={styles.image} source={SkateBackground} />
+          <Image style={styles.image} source={image} />
         </View>
         <View style={styles.contentContainer}>
-          <Text>Spot Name</Text>
-          <Text>Description</Text>
+          <Text>{name}</Text>
+          <Text>{description}</Text>
           <Text>Distance From Me:</Text>
         </View>
       </View>
@@ -48,8 +43,3 @@ const styles = StyleSheet.create({
     width: '100%'
   }
 });
-
-export default connect(
-  null,
-  null
-)(SpotCard);
