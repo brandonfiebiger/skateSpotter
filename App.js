@@ -26,6 +26,7 @@ export class App extends Component {
           <Route exact path="/SpotIt" component={SpotForm} />
           <Route exact path="/SignUp" component={SignUp} />
           <Route exact path="/SpotContainer" component={SpotContainer} />
+          <Route exact path="/Login" component={Login} />
         </View>
       </NativeRouter>
     );
