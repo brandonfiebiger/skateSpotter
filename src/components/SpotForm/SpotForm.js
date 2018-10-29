@@ -94,7 +94,7 @@ class SpotForm extends Component {
 
     this.props.addSpot({
       description: description.value,
-      image: selectedImage,
+      image: [selectedImage],
       name: name.value,
       latitude,
       longitude
@@ -135,7 +135,7 @@ class SpotForm extends Component {
 const styles = StyleSheet.create({
   view: {
     width: '100%',
-    height: 500,
+    height: '90%',
     marginTop: 20,
     display: 'flex',
     alignItems: 'center',
@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     width: '100%',
-    height: 200,
+    height: 400,
     borderRadius: 4,
     borderWidth: 0.5,
     borderColor: 'black'
