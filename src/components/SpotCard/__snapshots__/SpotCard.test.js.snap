@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SpotCard should match the snapshot 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "flexDirection": "row",
+      "height": "50%",
+      "justifyContent": "center",
+      "width": "100%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "height": "50%",
+        "width": "50%",
+      }
+    }
+  >
+    <Image
+      source={
+        Object {
+          "testUri": "../../../src/assets/images/skate-spotter-home.png",
+        }
+      }
+      style={
+        Object {
+          "height": "50%",
+          "width": "100%",
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 1,
+        "height": "50%",
+        "width": "50%",
+      }
+    }
+  >
+    <Text>
+      Spot Name
+    </Text>
+    <Text>
+      Description
+    </Text>
+    <Text>
+      Distance From Me:
+    </Text>
+  </View>
+</View>
+`;
