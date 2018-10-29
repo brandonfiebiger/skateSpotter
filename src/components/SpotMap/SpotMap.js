@@ -37,7 +37,13 @@ export class SpotMap extends Component {
           }}
           region={userLocation}
         >
-          {userLocation && <MapView.Marker coordinate={userLocation} />}
+          {userLocation && (
+            <MapView.Marker coordinate={userLocation}>
+              <View>
+                <View style={styles.marker} />
+              </View>
+            </MapView.Marker>
+          )}
           {displayMarkers}
         </MapView>
         <SpotContainer />
@@ -49,12 +55,21 @@ export class SpotMap extends Component {
 const styles = StyleSheet.create({
   mapContainer: {
     width: '100%',
-    height: '95%',
+    height: '92%',
     marginTop: 20
   },
   map: {
     width: '100%',
     height: '60%'
+  },
+  marker: {
+    height: 20,
+    width: 20,
+    borderWidth: 3,
+    borderColor: 'white',
+    borderRadius: 10,
+    overflow: 'hidden',
+    backgroundColor: '#007AFF'
   }
 });
 

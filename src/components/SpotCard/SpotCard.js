@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   imageContainer: {
-    height: '50%',
+    height: '65%',
     width: '50%'
   },
   contentContainer: {
