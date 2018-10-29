@@ -18,9 +18,11 @@ export default class SpotCard extends Component {
           <Image style={styles.image} source={image} />
         </View>
         <View style={styles.contentContainer}>
-          <Text>{name}</Text>
-          <Text>{description}</Text>
-          <Text>Distance From Me: 4 mi.</Text>
+          <Text style={[styles.header, styles.text]}>{name}</Text>
+          <Text style={[styles.description, styles.text]}>{description}</Text>
+          <Text style={[styles.distance, styles.text]}>
+            Distance From Me: 4 mi.
+          </Text>
           <TouchableHighlight style={styles.routeButton}>
             <Button color="#f7f7f7" title="Route" />
           </TouchableHighlight>
@@ -33,22 +35,22 @@ export default class SpotCard extends Component {
 const styles = StyleSheet.create({
   card: {
     flex: 1,
-    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '50%',
+    height: 700,
     width: '100%'
   },
   imageContainer: {
-    height: '65%',
-    width: '50%'
+    height: '50%',
+    width: '100%'
   },
   contentContainer: {
     flex: 1,
+    flexDirection: 'column',
     fontSize: 5,
-    justifyContent: 'space-around',
-    height: '50%',
-    width: '50%'
+    // justifyContent: 'space-around',
+    height: '100%',
+    width: '100%'
   },
   image: {
     height: '100%',
@@ -58,10 +60,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
     borderRadius: 10,
     height: 35,
-    marginLeft: 50,
     opacity: 0.8,
     paddingBottom: 5,
-    textAlignVertical: 'center',
     width: 80
-  }
+  },
+  header: {},
+  description: {},
+  distance: {},
+  text: {}
 });

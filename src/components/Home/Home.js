@@ -50,6 +50,10 @@ export class Home extends Component {
     this.props.history.push('/SignUp');
   };
 
+  handleRouteToLogin = () => {
+    this.props.history.push('/Login');
+  };
+
   render() {
     return (
       <ImageBackground style={styles.homeContainer} source={SkateBackground}>
@@ -62,7 +66,11 @@ export class Home extends Component {
           />
         </TouchableHighlight>
         <TouchableHighlight style={styles.homeButton}>
-          <Button color="#f7f7f7" title="Login" />
+          <Button
+            color="#f7f7f7"
+            title="Login"
+            onPress={this.handleRouteToLogin}
+          />
         </TouchableHighlight>
         <TouchableHighlight style={styles.homeButton}>
           <Button
