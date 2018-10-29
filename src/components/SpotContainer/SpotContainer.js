@@ -4,24 +4,26 @@ import { connect } from 'react-redux';
 import SpotCard from '../SpotCard/SpotCard';
 
 export class SpotContainer extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
   displaySpotCards = () => {
-    let cards = [];
-    for (let i = 0; i < 10; i++) {
-      return <SpotCard />;
-    }
+    const { spots } = this.props;
+
+    const cards = spots.map(spot => {
+      const image = spot.photos[0].url;
+
+      return (
+        <SpotCard
+          name={spot.name}
+          description={spot.description}
+          image={{ uri: image }}
+        />
+      );
+    });
+
+    return cards;
   };
 
   render() {
-    return (
-      <View style={styles.spotContainer}>
-        <SpotCard />
-      </View>
-    );
+    return <View style={styles.spotContainer}>{this.displaySpotCards()}</View>;
   }
 }
 
@@ -31,7 +33,11 @@ const styles = StyleSheet.create({
   }
 });
 
+export const mapStateToProps = state => ({
+  spots: state.spots
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   null
 )(SpotContainer);
