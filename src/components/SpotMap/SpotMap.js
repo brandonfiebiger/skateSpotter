@@ -56,11 +56,12 @@ const styles = StyleSheet.create({
   mapContainer: {
     width: '100%',
     height: '92%',
-    marginTop: 20
+    marginTop: 20,
+    marginBottom: 20
   },
   map: {
     width: '100%',
-    height: '60%'
+    height: '40%'
   },
   marker: {
     height: 20,
