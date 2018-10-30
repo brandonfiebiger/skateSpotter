@@ -45,17 +45,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 700,
-    width: '100%'
+    width: '100%',
+    marginTop: 30,
+    marginBottom: 30
   },
   imageContainer: {
-    height: '50%',
+    height: '80%',
     width: '100%'
   },
   contentContainer: {
     flex: 1,
     flexDirection: 'column',
     fontSize: 5,
-    // justifyContent: 'space-around',
     height: '100%',
     width: '100%'
   },
