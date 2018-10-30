@@ -21,6 +21,20 @@ class SignUp extends Component {
           minLength: 6
         }
       },
+      userName: {
+        value: '',
+        valid: false,
+        validationRules: {
+          minLength: 6
+        }
+      },
+      catchPhrase: {
+        value: '',
+        valid: false,
+        validationRules: {
+          minLength: 6
+        }
+      },
       passwordConfirmation: {
         value: '',
         valid: false,
@@ -65,8 +79,28 @@ class SignUp extends Component {
     }
   };
 
+  handleSubmit = () => {
+    const { email, password, passwordConfirmation, userName, catchPhrase } = this.state;
+
+    fetch('https://skate-spotter.herokuapp.com/api/v1/sign_up', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: userName.value,
+        email: email.value,
+        password: password.value,
+        tag: catchPhrase.value
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log(error));
+  }
+
   render() {
-    const { email, password, passwordConfirmation, allValid } = this.state;
+    const { email, password, passwordConfirmation, userName, catchPhrase, allValid } = this.state;
     return (
       <View style={styles.view}>
         <View style={styles.textInputsContainer}>
@@ -76,6 +110,18 @@ class SignUp extends Component {
             value={email.value}
             onChangeText={val => this.handleOnChange('email', val)}
             placeholder="Email"
+          />
+           <TextInput
+            style={userName.valid ? [styles.input, styles.valid] : styles.input}
+            value={userName.value}
+            onChangeText={val => this.handleOnChange('userName', val)}
+            placeholder="Username"
+          />
+          <TextInput
+            style={catchPhrase.valid ? [styles.input, styles.valid] : styles.input}
+            value={catchPhrase.value}
+            onChangeText={val => this.handleOnChange('catchPhrase', val)}
+            placeholder="Your best catch phrase"
           />
           <TextInput
             style={password.valid ? [styles.input, styles.valid] : styles.input}
