@@ -12,6 +12,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "conversions": "^1.5.2",
+    "geolib": "^2.0.24",
     "react": "16.6.0-alpha.8af6728",
     "react-native": "0.57.3",
     "react-native-aws3": "0.0.8",
