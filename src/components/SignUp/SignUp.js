@@ -97,6 +97,7 @@ class SignUp extends Component {
     .then(response => response.json())
     .then(data => console.log(data))
     .catch(error => console.log(error));
+    this.props.history.push('/SpotMap')
   }
 
   render() {
