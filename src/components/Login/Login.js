@@ -7,7 +7,8 @@ import {
   SafeAreaView,
   ScrollView,
   Dimensions,
-  Image
+  Image,
+  TouchableHighlight
 } from 'react-native';
 import { Header, Left, Right, Icon } from 'native-base';
 import Home from '../Home/Home';
@@ -80,10 +81,10 @@ export default class Login extends Component {
         'Content-Type': 'application/json'
       }
     })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.log(error));
-  }
+      .then(response => response.json())
+      .then(data => console.log(data))
+      .catch(error => console.log(error));
+  };
 
   render() {
     const { userName, password, allValid } = this.state;
@@ -95,6 +96,7 @@ export default class Login extends Component {
             <Icon
               name="menu"
               onPress={() => this.props.navigation.openDrawer()}
+              style={{}}
             />
           </Left>
         </Header>
@@ -112,11 +114,15 @@ export default class Login extends Component {
             secureTextEntry="true"
             placeholder="Password"
           />
-          <Button
-            title="Login"
-            onPress={this.handleSubmit}
-            disabled={!allValid}
-          />
+          <TouchableHighlight
+            style={password.valid ? styles.validButton : styles.loginButton}
+          >
+            <Button
+              title="Login"
+              onPress={this.handleSubmit}
+              disabled={!allValid}
+            />
+          </TouchableHighlight>
         </View>
       </View>
     );
@@ -129,12 +135,12 @@ const styles = StyleSheet.create({
     height: 50
   },
   view: {
-    height: '100%',
+    height: 500,
     width: '100%',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 80
+    marginTop: 320
   },
   input: {
     height: 30,
@@ -149,5 +155,23 @@ const styles = StyleSheet.create({
   valid: {
     borderColor: '#137B13',
     borderWidth: 2
+  },
+  validButton: {
+    backgroundColor: 'black',
+    borderRadius: 10,
+    height: 45,
+    marginTop: 20,
+    opacity: 0.85,
+    paddingTop: 3,
+    width: 175
+  },
+  loginButton: {
+    backgroundColor: 'gray',
+    borderRadius: 10,
+    height: 45,
+    marginTop: 20,
+    opacity: 0.85,
+    paddingTop: 3,
+    width: 175
   }
 });
