@@ -15,8 +15,10 @@ import Home from '../Home/Home';
 import SpotMap from '../SpotMap/SpotMap';
 import Avatar from '../../assets/images/avatar-example.png';
 import validate from '../../utils/validation';
+import { connect } from 'react-redux';
+import { logIn } from '../../store/actions'
 
-export default class Login extends Component {
+export class Login extends Component {
   constructor() {
     super();
     this.state = {
@@ -82,7 +84,10 @@ export default class Login extends Component {
       }
     })
       .then(response => response.json())
-      .then(data => console.log(data))
+      .then(user => {
+        this.props.logIn(user)
+        this.props.navigation.navigate('Spots Near Me');
+      })
       .catch(error => console.log(error));
   };
 
@@ -175,3 +180,9 @@ const styles = StyleSheet.create({
     width: 175
   }
 });
+
+export const mapDispatchToProps = dispatch => ({
+  logIn: user => dispatch(logIn(user))
+})
+
+export default connect(null, mapDispatchToProps)(Login)
