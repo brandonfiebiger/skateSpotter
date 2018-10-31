@@ -38,7 +38,7 @@ export class Login extends Component {
         }
       },
       allValid: false,
-      hasErrored: true
+      hasErrored: false
     };
   }
 
