@@ -22,6 +22,8 @@ export class SpotContainer extends Component {
           name={spot.name}
           description={spot.description}
           image={{ uri: image }}
+          latitude={ spot.latitude }
+          longitude={ spot.longitude }
         />
       );
     });

@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import geolib from 'geolib';
+import conversions from 'conversions';
+
 import {
   View,
   Button,
@@ -8,9 +12,9 @@ import {
   TouchableHighlight
 } from 'react-native';
 
-export default class SpotCard extends Component {
+export class SpotCard extends Component {
   render() {
-    const { name, description, image } = this.props;
+    const { name, description, image, latitude, longitude, userLocation } = this.props;
 
     return (
       <View style={styles.card}>
@@ -21,7 +25,10 @@ export default class SpotCard extends Component {
           <Text style={[styles.header, styles.text]}>{name}</Text>
           <Text style={[styles.description, styles.text]}>{description}</Text>
           <Text style={[styles.distance, styles.text]}>
-            Distance From Me: 4 mi.
+            Distance From Me: {Math.round(conversions(geolib.getDistance(
+              {latitude: userLocation.latitude, longitude: userLocation.longitude},
+              {latitude: latitude, longitude: longitude }
+            ), 'metres', 'miles') * 100)/ 100} miles
           </Text>
           <TouchableHighlight style={styles.routeButton}>
             <Button color="#f7f7f7" title="Route" />
@@ -38,10 +45,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 700,
-    width: '100%'
+    width: '100%',
+    marginTop: 30,
+    marginBottom: 30
   },
   imageContainer: {
-    height: '50%',
+    height: '80%',
     width: '100%'
   },
   contentContainer: {
@@ -68,3 +77,10 @@ const styles = StyleSheet.create({
   distance: {},
   text: {}
 });
+
+export const mapStateToProps = state => ({
+  userLocation: state.userLocation
+})
+
+
+export default connect(mapStateToProps, null)(SpotCard)
