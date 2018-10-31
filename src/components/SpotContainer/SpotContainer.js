@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
-import {
-  View,
-  Button,
-  Text,
-  Image,
-  StyleSheet,
-  ScrollView
-} from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import SpotCard from '../SpotCard/SpotCard';
 
@@ -22,8 +15,8 @@ export class SpotContainer extends Component {
           name={spot.name}
           description={spot.description}
           image={{ uri: image }}
-          latitude={ spot.latitude }
-          longitude={ spot.longitude }
+          latitude={spot.latitude}
+          longitude={spot.longitude}
         />
       );
     });

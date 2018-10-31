@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
+import { Header, Left, Icon } from 'native-base';
 import MapView from 'react-native-maps';
 import SpotContainer from '../SpotContainer/SpotContainer';
 
 export class SpotMap extends Component {
-  directToHome = () => {
-    this.props.history.push('/');
-  };
-
   render() {
     const { userLocation, spots } = this.props;
 
@@ -25,7 +22,14 @@ export class SpotMap extends Component {
 
     return (
       <View style={styles.mapContainer}>
-        <Button title="Home" onPress={this.directToHome} />
+        <Header style={styles.header}>
+          <Left>
+            <Icon
+              name="menu"
+              onPress={() => this.props.navigation.openDrawer()}
+            />
+          </Left>
+        </Header>
         <MapView
           style={styles.map}
           initialRegion={{
@@ -52,10 +56,13 @@ export class SpotMap extends Component {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    width: '100%',
+    height: 50
+  },
   mapContainer: {
     width: '100%',
-    height: '90%',
-    marginTop: 20
+    height: '160%'
   },
   map: {
     width: '100%',
