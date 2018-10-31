@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Text,
   View,
   Button,
   StyleSheet,
@@ -9,8 +10,10 @@ import {
 import { HeaderBackButton } from 'react-navigation';
 import { Header, Left } from 'native-base';
 import validate from '../../utils/validation';
+import { connect } from 'react-redux';
+import { logIn } from '../../store/actions'
 
-export default class Login extends Component {
+export class Login extends Component {
   constructor() {
     super();
     this.state = {
@@ -28,7 +31,8 @@ export default class Login extends Component {
           minLength: 6
         }
       },
-      allValid: false
+      allValid: false,
+      hasErrored: false
     };
   }
 
@@ -76,12 +80,18 @@ export default class Login extends Component {
       }
     })
       .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.log(error));
+      .then(user => {
+        this.props.logIn(user)
+        this.props.navigation.navigate('Spots Near Me');
+      })
+      .catch(error => {
+        this.setState({hasErrored: true})
+        console.log(error)
+      });
   };
 
   render() {
-    const { userName, password, allValid } = this.state;
+    const { userName, password, allValid, hasErrored } = this.state;
 
     return (
       <View>
@@ -93,6 +103,7 @@ export default class Login extends Component {
           </Left>
         </Header>
         <View style={styles.view}>
+          {hasErrored && <Text>Email or password did not match</Text>}
           <TextInput
             style={userName.valid ? [styles.input, styles.valid] : styles.input}
             value={userName.value}
@@ -167,3 +178,9 @@ const styles = StyleSheet.create({
     width: 175
   }
 });
+
+export const mapDispatchToProps = dispatch => ({
+  logIn: user => dispatch(logIn(user))
+})
+
+export default connect(null, mapDispatchToProps)(Login)

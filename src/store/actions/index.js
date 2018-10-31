@@ -16,3 +16,9 @@ export const populateSpots = spots => ({
 export const logout = () => ({
   type: 'LOG_OUT'
 });
+
+export const logIn = user => ({
+  type: 'LOG_IN',
+  user
+})
+
