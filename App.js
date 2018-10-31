@@ -25,6 +25,11 @@ export class App extends Component {
       .catch(error => console.log(error));
   }
 
+  logoutUser = () => {
+    fetch('https://skate-spotter.herokuapp.com/api/v1/logout');
+    this.props.logout();
+  };
+
   render() {
     return <Drawer />;
   }
@@ -52,6 +57,7 @@ const CustomDrawerComponent = props => {
       </View>
       <ScrollView>
         <DrawerItems {...props} />
+        <Button title="Log Out" onPress={this.logoutUser} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -75,7 +81,8 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  populateSpots: spots => dispatch(populateSpots(spots))
+  populateSpots: spots => dispatch(populateSpots(spots)),
+  logout: () => dispatch(logout())
 });
 
 export default connect(
