@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, Button } from 'react-native';
-import { withRouter, Link } from 'react-router-native';
 import { connect } from 'react-redux';
 import MapView from 'react-native-maps';
 import SpotContainer from '../SpotContainer/SpotContainer';
@@ -55,7 +54,7 @@ export class SpotMap extends Component {
 const styles = StyleSheet.create({
   mapContainer: {
     width: '100%',
-    height: '92%',
+    height: '90%',
     marginTop: 20
   },
   map: {
@@ -78,9 +77,7 @@ export const mapStateToProps = state => ({
   spots: state.spots
 });
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    null
-  )(SpotMap)
-);
+export default connect(
+  mapStateToProps,
+  null
+)(SpotMap);
