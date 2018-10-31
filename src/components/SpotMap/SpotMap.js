@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableHighlight, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { Header, Left, Icon } from 'native-base';
 import MapView from 'react-native-maps';
 import SpotContainer from '../SpotContainer/SpotContainer';
 
 export class SpotMap extends Component {
+  markerClick = () => {
+    console.log('marker clicked');
+  };
+
   render() {
     const { userLocation, spots } = this.props;
+
+    const marker = {
+      title: 'spot name',
+      description: 'This is a great spot...'
+    };
 
     const displayMarkers = spots.map((location, index) => {
       const fullLocation = {
@@ -17,7 +26,28 @@ export class SpotMap extends Component {
         longitudeDelta: 0.0421
       };
 
-      return <MapView.Marker coordinate={fullLocation} key={index} />;
+      return (
+        <MapView.Marker
+          title="spot name"
+          description="This is a great spot"
+          coordinate={fullLocation}
+          key={index}
+        >
+          <MapView.Callout tooltip style={styles.customView}>
+            <TouchableHighlight
+              onPress={() => this.markerClick()}
+              underlayColor="#dddddd"
+            >
+              <View style={styles.calloutText}>
+                <Text>
+                  {marker.title}
+                  {marker.description}
+                </Text>
+              </View>
+            </TouchableHighlight>
+          </MapView.Callout>
+        </MapView.Marker>
+      );
     });
 
     return (
@@ -33,10 +63,10 @@ export class SpotMap extends Component {
         <MapView
           style={styles.map}
           initialRegion={{
-            latitude: 13.123456,
-            longitude: 42.456123,
-            latitudeDelta: 15.6922,
-            longitudeDelta: 15.6421
+            latitude: 39.7392,
+            longitude: -104.9903,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421
           }}
           region={userLocation}
         >
@@ -62,11 +92,11 @@ const styles = StyleSheet.create({
   },
   mapContainer: {
     width: '100%',
-    height: '160%'
+    height: '100%'
   },
   map: {
     width: '100%',
-    height: '40%'
+    height: '60%'
   },
   marker: {
     height: 20,
@@ -76,7 +106,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     overflow: 'hidden',
     backgroundColor: '#007AFF'
-  }
+  },
+  customView: { height: 100, width: 100 },
+  calloutText: { color: 'red' }
 });
 
 export const mapStateToProps = state => ({
