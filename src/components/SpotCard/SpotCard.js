@@ -25,10 +25,10 @@ export class SpotCard extends Component {
           <Text style={[styles.header, styles.text]}>{name}</Text>
           <Text style={[styles.description, styles.text]}>{description}</Text>
           <Text style={[styles.distance, styles.text]}>
-            Distance From Me: {Math.round(conversions(geolib.getDistance(
+            {/* Distance From Me: {Math.round(conversions(geolib.getDistance(
               {latitude: userLocation.latitude, longitude: userLocation.longitude},
               {latitude: latitude, longitude: longitude }
-            ), 'metres', 'miles') * 100)/ 100} miles
+            ), 'metres', 'miles') * 100)/ 100} miles */}
           </Text>
           <TouchableHighlight style={styles.routeButton}>
             <Button color="#f7f7f7" title="Route" />
