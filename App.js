@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Route, NativeRouter } from 'react-router-native';
+import {
+  StyleSheet,
+  View,
+  SafeAreaView,
+  ScrollView,
+  Dimensions,
+  Image
+} from 'react-native';
 import Home from './src/components/Home/Home';
 import SpotMap from './src/components/SpotMap/SpotMap';
 import { connect } from 'react-redux';
 import SpotForm from './src/components/SpotForm/SpotForm';
 import SignUp from './src/components/SignUp/SignUp';
 import Login from './src/components/Login/Login';
-import { SpotContainer } from './src/components/SpotContainer/SpotContainer';
 import { populateSpots } from './src/store/actions';
+import { createDrawerNavigator, DrawerItems } from 'react-navigation';
+import Avatar from './src/assets/images/avatar-example.png';
 
 export class App extends Component {
   componentDidMount() {
@@ -19,38 +26,44 @@ export class App extends Component {
   }
 
   render() {
-    return (
-      <NativeRouter>
-        <View style={styles.container}>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/SpotMap" component={SpotMap} />
-          <Route exact path="/SpotIt" component={SpotForm} />
-          <Route exact path="/SignUp" component={SignUp} />
-          <Route exact path="/SpotContainer" component={SpotContainer} />
-          <Route exact path="/Login" component={Login} />
-        </View>
-      </NativeRouter>
-    );
+    return <Drawer />;
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+const CustomDrawerComponent = props => {
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ height: 150, backgroundColor: 'white' }}>
+        <Image
+          source={Avatar}
+          style={{
+            height: 120,
+            width: 120,
+            borderRadius: 60,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        />
+      </View>
+      <ScrollView>
+        <DrawerItems {...props} />
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+const Drawer = createDrawerNavigator(
+  {
+    Home: Home,
+    'Spots Near Me': SpotMap,
+    Login: Login,
+    'Sign Up': SignUp,
+    'Spot It': SpotForm
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5
+  {
+    contentComponent: CustomDrawerComponent
   }
-});
+);
 
 export const mapStateToProps = state => ({
   spots: state.spots

@@ -1,5 +1,18 @@
 import React, { Component } from 'react';
-import { View, Button, StyleSheet, TextInput } from 'react-native';
+import {
+  View,
+  Button,
+  StyleSheet,
+  TextInput,
+  SafeAreaView,
+  ScrollView,
+  Dimensions,
+  Image
+} from 'react-native';
+import { Header, Left, Right, Icon } from 'native-base';
+import Home from '../Home/Home';
+import SpotMap from '../SpotMap/SpotMap';
+import Avatar from '../../assets/images/avatar-example.png';
 import validate from '../../utils/validation';
 
 export default class Login extends Component {
@@ -23,10 +36,6 @@ export default class Login extends Component {
       allValid: false
     };
   }
-
-  directToHome = () => {
-    this.props.history.push('/');
-  };
 
   handleOnChange = (key, value) => {
     this.setState(prevState => {
@@ -80,9 +89,16 @@ export default class Login extends Component {
     const { userName, password, allValid } = this.state;
 
     return (
-      <View style={styles.view}>
-        <View style={styles.textInputsContainer}>
-          <Button title="Home" onPress={this.directToHome} />
+      <View>
+        <Header style={styles.header}>
+          <Left>
+            <Icon
+              name="menu"
+              onPress={() => this.props.navigation.openDrawer()}
+            />
+          </Left>
+        </Header>
+        <View style={styles.view}>
           <TextInput
             style={userName.valid ? [styles.input, styles.valid] : styles.input}
             value={userName.value}
@@ -108,12 +124,17 @@ export default class Login extends Component {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    width: '100%',
+    height: 50
+  },
   view: {
     height: '100%',
     width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-around'
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 80
   },
   input: {
     height: 30,
@@ -124,12 +145,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9f9f9',
     marginBottom: 8,
     paddingLeft: 2
-  },
-  textInputsContainer: {
-    height: '30%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
   },
   valid: {
     borderColor: '#137B13',
