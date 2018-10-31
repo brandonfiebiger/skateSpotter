@@ -14,7 +14,14 @@ import {
 
 export class SpotCard extends Component {
   render() {
-    const { name, description, image, latitude, longitude, userLocation } = this.props;
+    const {
+      name,
+      description,
+      image,
+      latitude,
+      longitude,
+      userLocation
+    } = this.props;
 
     return (
       <View style={styles.card}>
@@ -25,10 +32,21 @@ export class SpotCard extends Component {
           <Text style={[styles.header, styles.text]}>{name}</Text>
           <Text style={[styles.description, styles.text]}>{description}</Text>
           <Text style={[styles.distance, styles.text]}>
-            Distance From Me: {Math.round(conversions(geolib.getDistance(
-              {latitude: userLocation.latitude, longitude: userLocation.longitude},
-              {latitude: latitude, longitude: longitude }
-            ), 'metres', 'miles') * 100)/ 100} miles
+            Distance From Me:{' '}
+            {Math.round(
+              conversions(
+                geolib.getDistance(
+                  {
+                    latitude: userLocation.latitude,
+                    longitude: userLocation.longitude
+                  },
+                  { latitude: latitude, longitude: longitude }
+                ),
+                'metres',
+                'miles'
+              ) * 100
+            ) / 100}{' '}
+            miles
           </Text>
           <TouchableHighlight style={styles.routeButton}>
             <Button color="#f7f7f7" title="Route" />
@@ -80,7 +98,9 @@ const styles = StyleSheet.create({
 
 export const mapStateToProps = state => ({
   userLocation: state.userLocation
-})
+});
 
-
-export default connect(mapStateToProps, null)(SpotCard)
+export default connect(
+  mapStateToProps,
+  null
+)(SpotCard);
