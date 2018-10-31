@@ -95,15 +95,15 @@ class SpotForm extends Component {
         name: name.value,
         description: description.value,
         longitude: longitude,
-        latitude: latitude
+        latitude: latitude,
+        photo_url: selectedImage.uri
       }),
       headers: {
         'Content-Type': 'appliction/json'
       }
     })
       .then(response => response.json())
-      .then(data => {
-        console.log(data);
+      .then(() => {
         this.props.addSpot({
           description: description.value,
           photos: [selectedImage],
