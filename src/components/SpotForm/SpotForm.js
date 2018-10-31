@@ -112,7 +112,8 @@ class SpotForm extends Component {
         photos: [selectedImage],
         name: name.value,
         latitude,
-        longitude
+        longitude,
+        photo_url: selectedImage
       });
     })
     .catch(error => console.log(error));
