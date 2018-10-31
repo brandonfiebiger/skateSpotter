@@ -14,7 +14,14 @@ import {
 
 export class SpotCard extends Component {
   render() {
-    const { name, description, image, latitude, longitude, userLocation } = this.props;
+    const {
+      name,
+      description,
+      image,
+      latitude,
+      longitude,
+      userLocation
+    } = this.props;
 
     return (
       <View style={styles.card}>
@@ -80,7 +87,9 @@ const styles = StyleSheet.create({
 
 export const mapStateToProps = state => ({
   userLocation: state.userLocation
-})
+});
 
-
-export default connect(mapStateToProps, null)(SpotCard)
+export default connect(
+  mapStateToProps,
+  null
+)(SpotCard);

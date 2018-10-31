@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { View, Text, TextInput, StyleSheet, Button } from 'react-native';
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Button,
+  TouchableHighlight
+} from 'react-native';
 import validate from '../../utils/validation';
+import { Header, Left } from 'native-base';
+import { HeaderBackButton } from 'react-navigation';
 
 class SignUp extends Component {
   constructor() {
@@ -46,10 +53,6 @@ class SignUp extends Component {
     };
   }
 
-  directToHome = () => {
-    this.props.history.push('/');
-  };
-
   handleOnChange = (key, value) => {
     this.setState(prevState => {
       return {
@@ -80,7 +83,13 @@ class SignUp extends Component {
   };
 
   handleSubmit = () => {
-    const { email, password, passwordConfirmation, userName, catchPhrase } = this.state;
+    const {
+      email,
+      password,
+      passwordConfirmation,
+      userName,
+      catchPhrase
+    } = this.state;
 
     fetch('https://skate-spotter.herokuapp.com/api/v1/sign_up', {
       credentials: 'same-origin',
@@ -95,64 +104,92 @@ class SignUp extends Component {
         'Content-Type': 'application/json'
       }
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data)
-      this.props.history.push('/SpotMap')
-    })
-    .catch(error => console.log(error));
-    
-  }
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        this.props.history.push('/SpotMap');
+      })
+      .catch(error => console.log(error));
+  };
 
   render() {
-    const { email, password, passwordConfirmation, userName, catchPhrase, allValid } = this.state;
+    const {
+      email,
+      password,
+      passwordConfirmation,
+      userName,
+      catchPhrase,
+      allValid
+    } = this.state;
     return (
-      <View style={styles.view}>
-        <View style={styles.textInputsContainer}>
-          <Button title="Home" onPress={this.directToHome} />
-          <TextInput
-            style={email.valid ? [styles.input, styles.valid] : styles.input}
-            value={email.value}
-            onChangeText={val => this.handleOnChange('email', val)}
-            placeholder="Email"
-          />
-           <TextInput
-            style={userName.valid ? [styles.input, styles.valid] : styles.input}
-            value={userName.value}
-            onChangeText={val => this.handleOnChange('userName', val)}
-            placeholder="Username"
-          />
-          <TextInput
-            style={catchPhrase.valid ? [styles.input, styles.valid] : styles.input}
-            value={catchPhrase.value}
-            onChangeText={val => this.handleOnChange('catchPhrase', val)}
-            placeholder="Your best catch phrase"
-          />
-          <TextInput
-            style={password.valid ? [styles.input, styles.valid] : styles.input}
-            value={password.value}
-            onChangeText={val => this.handleOnChange('password', val)}
-            secureTextEntry="true"
-            placeholder="Password"
-          />
-          <TextInput
-            style={
-              passwordConfirmation.valid
-                ? [styles.input, styles.valid]
-                : styles.input
-            }
-            value={passwordConfirmation.value}
-            onChangeText={val =>
-              this.handleOnChange('passwordConfirmation', val)
-            }
-            secureTextEntry="true"
-            placeholder="Confirm Password"
-          />
-          <Button
-            title="Sign Up"
-            onPress={this.handleSubmit}
-            disabled={!allValid}
-          />
+      <View>
+        <Header style={styles.header}>
+          <Left>
+            <HeaderBackButton
+              onPress={() => this.props.navigation.navigate('Home')}
+            />
+          </Left>
+        </Header>
+        <View style={styles.view}>
+          <View style={styles.textInputsContainer}>
+            <TextInput
+              style={email.valid ? [styles.input, styles.valid] : styles.input}
+              value={email.value}
+              onChangeText={val => this.handleOnChange('email', val)}
+              placeholder="Email"
+            />
+            <TextInput
+              style={
+                userName.valid ? [styles.input, styles.valid] : styles.input
+              }
+              value={userName.value}
+              onChangeText={val => this.handleOnChange('userName', val)}
+              placeholder="Username"
+            />
+            <TextInput
+              style={
+                catchPhrase.valid ? [styles.input, styles.valid] : styles.input
+              }
+              value={catchPhrase.value}
+              onChangeText={val => this.handleOnChange('catchPhrase', val)}
+              placeholder="Your best catch phrase"
+            />
+            <TextInput
+              style={
+                password.valid ? [styles.input, styles.valid] : styles.input
+              }
+              value={password.value}
+              onChangeText={val => this.handleOnChange('password', val)}
+              secureTextEntry="true"
+              placeholder="Password"
+            />
+            <TextInput
+              style={
+                passwordConfirmation.valid
+                  ? [styles.input, styles.valid]
+                  : styles.input
+              }
+              value={passwordConfirmation.value}
+              onChangeText={val =>
+                this.handleOnChange('passwordConfirmation', val)
+              }
+              secureTextEntry="true"
+              placeholder="Confirm Password"
+            />
+            <TouchableHighlight
+              style={
+                passwordConfirmation.valid
+                  ? styles.validButton
+                  : styles.signupButton
+              }
+            >
+              <Button
+                title="Sign Up"
+                onPress={this.handleSubmit}
+                disabled={!allValid}
+              />
+            </TouchableHighlight>
+          </View>
         </View>
       </View>
     );
@@ -160,12 +197,14 @@ class SignUp extends Component {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    width: '100%',
+    height: 50
+  },
   view: {
     height: '100%',
     width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-around'
+    marginTop: 220
   },
   input: {
     height: 30,
@@ -186,6 +225,24 @@ const styles = StyleSheet.create({
   valid: {
     borderColor: '#137B13',
     borderWidth: 2
+  },
+  validButton: {
+    backgroundColor: 'black',
+    borderRadius: 10,
+    height: 45,
+    marginTop: 20,
+    opacity: 0.85,
+    paddingTop: 3,
+    width: 175
+  },
+  signupButton: {
+    backgroundColor: 'gray',
+    borderRadius: 10,
+    height: 45,
+    marginTop: 20,
+    opacity: 0.85,
+    paddingTop: 3,
+    width: 175
   }
 });
 

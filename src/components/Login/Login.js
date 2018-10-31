@@ -5,16 +5,10 @@ import {
   Button,
   StyleSheet,
   TextInput,
-  SafeAreaView,
-  ScrollView,
-  Dimensions,
-  Image,
   TouchableHighlight
 } from 'react-native';
-import { Header, Left, Right, Icon } from 'native-base';
-import Home from '../Home/Home';
-import SpotMap from '../SpotMap/SpotMap';
-import Avatar from '../../assets/images/avatar-example.png';
+import { HeaderBackButton } from 'react-navigation';
+import { Header, Left } from 'native-base';
 import validate from '../../utils/validation';
 import { connect } from 'react-redux';
 import { logIn } from '../../store/actions'
@@ -103,10 +97,8 @@ export class Login extends Component {
       <View>
         <Header style={styles.header}>
           <Left>
-            <Icon
-              name="menu"
-              onPress={() => this.props.navigation.openDrawer()}
-              style={{}}
+            <HeaderBackButton
+              onPress={() => this.props.navigation.navigate('Home')}
             />
           </Left>
         </Header>

@@ -6,6 +6,7 @@ import ImagePicker from 'react-native-image-picker';
 import { RNS3 } from 'react-native-aws3';
 import validate from '../../utils/validation';
 import { accessKey, secretKey } from '../../utils/keys';
+import { Header, Left, Icon } from 'native-base';
 
 class SpotForm extends Component {
   constructor() {
@@ -29,10 +30,6 @@ class SpotForm extends Component {
       allValid: false
     };
   }
-
-  directToHome = () => {
-    this.props.history.push('/');
-  };
 
   checkForAllValid = () => {
     const { name, description, selectedImage } = this.state;
@@ -118,13 +115,19 @@ class SpotForm extends Component {
       });
     })
     .catch(error => console.log(error));
-    
   };
 
   render() {
     return (
       <View style={styles.view}>
-        <Button title="Home" onPress={this.directToHome} />
+        <Header style={styles.header}>
+          <Left>
+            <Icon
+              name="menu"
+              onPress={() => this.props.navigation.openDrawer()}
+            />
+          </Left>
+        </Header>
         <Image
           style={styles.imageContainer}
           source={this.state.selectedImage}
@@ -143,7 +146,7 @@ class SpotForm extends Component {
           placeholder="Description"
         />
         <Button
-          title="Add New Spot!"
+          title="Add New Spot"
           onPress={this.handleSubmit}
           disabled={!this.state.allValid}
         />
@@ -153,10 +156,13 @@ class SpotForm extends Component {
 }
 
 const styles = StyleSheet.create({
+  header: {
+    width: '100%',
+    height: 50
+  },
   view: {
     width: '100%',
     height: '90%',
-    marginTop: 20,
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
@@ -164,7 +170,7 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     width: '100%',
-    height: 400,
+    height: 420,
     borderRadius: 4,
     borderWidth: 0.5,
     borderColor: 'black'
