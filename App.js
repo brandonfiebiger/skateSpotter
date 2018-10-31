@@ -17,6 +17,7 @@ import Login from './src/components/Login/Login';
 import { populateSpots } from './src/store/actions';
 import { createDrawerNavigator, DrawerItems } from 'react-navigation';
 import Avatar from './src/assets/images/avatar-example.png';
+import LogOut from './src/components/LogOut/LogOut';
 
 export class App extends Component {
   componentDidMount() {
@@ -26,43 +27,10 @@ export class App extends Component {
       .catch(error => console.log(error));
   }
 
-  logoutUser = () => {
-    fetch('https://skate-spotter.herokuapp.com/api/v1/logout');
-    this.props.logout();
-  };
-
   render() {
     return <Drawer />;
   }
 }
-
-const CustomDrawerComponent = props => {
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View
-        style={{
-          height: 150,
-          backgroundColor: 'white',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      >
-        <Image
-          source={Avatar}
-          style={{
-            height: 80,
-            width: 80,
-            borderRadius: 40
-          }}
-        />
-      </View>
-      <ScrollView>
-        <DrawerItems {...props} />
-        <Button title="Log Out" onPress={this.logoutUser} />
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
 
 const Drawer = createDrawerNavigator(
   {
@@ -70,10 +38,10 @@ const Drawer = createDrawerNavigator(
     'Spots Near Me': SpotMap,
     Login: Login,
     'Sign Up': SignUp,
-    'Spot It': SpotForm
+    'Spot It': SpotForm,
+    'Logout': LogOut
   },
   {
-    contentComponent: CustomDrawerComponent
   }
 );
 
