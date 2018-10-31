@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Text,
   View,
   Button,
   StyleSheet,
@@ -30,7 +31,8 @@ export class Login extends Component {
           minLength: 6
         }
       },
-      allValid: false
+      allValid: false,
+      hasErrored: false
     };
   }
 
@@ -82,11 +84,14 @@ export class Login extends Component {
         this.props.logIn(user)
         this.props.navigation.navigate('Spots Near Me');
       })
-      .catch(error => console.log(error));
+      .catch(error => {
+        this.setState({hasErrored: true})
+        console.log(error)
+      });
   };
 
   render() {
-    const { userName, password, allValid } = this.state;
+    const { userName, password, allValid, hasErrored } = this.state;
 
     return (
       <View>
@@ -98,6 +103,7 @@ export class Login extends Component {
           </Left>
         </Header>
         <View style={styles.view}>
+          {hasErrored && <Text>Email or password did not match</Text>}
           <TextInput
             style={userName.valid ? [styles.input, styles.valid] : styles.input}
             value={userName.value}
