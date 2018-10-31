@@ -83,6 +83,7 @@ class SignUp extends Component {
     const { email, password, passwordConfirmation, userName, catchPhrase } = this.state;
 
     fetch('https://skate-spotter.herokuapp.com/api/v1/sign_up', {
+      credentials: 'same-origin',
       method: 'POST',
       body: JSON.stringify({
         name: userName.value,
