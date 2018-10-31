@@ -12,3 +12,8 @@ export const populateSpots = spots => ({
   type: 'POPULATE_SPOTS',
   spots
 })
+
+export const logIn = user => ({
+  type: 'LOG_IN',
+  user
+})
