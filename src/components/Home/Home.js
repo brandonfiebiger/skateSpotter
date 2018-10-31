@@ -8,7 +8,6 @@ import {
   TouchableHighlight
 } from 'react-native';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-native';
 import { getUserLocation } from '../../store/actions';
 
 export class Home extends Component {
@@ -18,10 +17,6 @@ export class Home extends Component {
       userLocation: null
     };
   }
-
-  handleRouteToMap = () => {
-    this.props.history.push('/SpotMap');
-  };
 
   componentDidMount() {
     navigator.geolocation.getCurrentPosition(
@@ -38,20 +33,12 @@ export class Home extends Component {
     );
   }
 
-  navToSpotIt = () => {
-    this.handleRouteToSpotIt();
+  handleSignUp = () => {
+    this.props.navigation.navigate('Sign Up');
   };
 
-  handleRouteToSpotIt = () => {
-    this.props.history.push('/SpotIt');
-  };
-
-  handleRouteToSignUp = () => {
-    this.props.history.push('/SignUp');
-  };
-
-  handleRouteToLogin = () => {
-    this.props.history.push('/Login');
+  handleLogin = () => {
+    this.props.navigation.navigate('Login');
   };
 
   render() {
@@ -59,28 +46,10 @@ export class Home extends Component {
       <ImageBackground style={styles.homeContainer} source={SkateBackground}>
         <Text style={styles.homeHeader}>SkateSpotter</Text>
         <TouchableHighlight style={styles.homeButton}>
-          <Button
-            color="#f7f7f7"
-            title="Spots Near Me"
-            onPress={this.handleRouteToMap}
-          />
+          <Button color="#f7f7f7" title="Login" onPress={this.handleLogin} />
         </TouchableHighlight>
-        <TouchableHighlight style={styles.homeButton}>
-          <Button
-            color="#f7f7f7"
-            title="Login"
-            onPress={this.handleRouteToLogin}
-          />
-        </TouchableHighlight>
-        <TouchableHighlight style={styles.homeButton}>
-          <Button
-            color="#f7f7f7"
-            title="Sign Up"
-            onPress={this.handleRouteToSignUp}
-          />
-        </TouchableHighlight>
-        <TouchableHighlight style={styles.homeButton}>
-          <Button color="#f7f7f7" title="Spot It" onPress={this.navToSpotIt} />
+        <TouchableHighlight style={[styles.homeButton, styles.loginButton]}>
+          <Button color="#f7f7f7" title="Sign Up" onPress={this.handleSignUp} />
         </TouchableHighlight>
       </ImageBackground>
     );
@@ -108,9 +77,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     height: 45,
     marginTop: 20,
-    opacity: 0.8,
+    opacity: 0.85,
     paddingTop: 3,
     width: 175
+  },
+  loginButton: {
+    marginBottom: 70
   }
 });
 
@@ -122,9 +94,7 @@ export const mapDispatchToProps = dispatch => ({
   getLocation: location => dispatch(getUserLocation(location))
 });
 
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Home)
-);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);
