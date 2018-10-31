@@ -48,12 +48,8 @@ export class SpotCard extends Component {
 
 const styles = StyleSheet.create({
   card: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 700,
+    height: 250,
     width: '100%',
-    marginTop: 30,
     marginBottom: 30
   },
   imageContainer: {
@@ -62,7 +58,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    flexDirection: 'column',
     fontSize: 5,
     height: '100%',
     width: '100%'

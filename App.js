@@ -5,7 +5,8 @@ import {
   SafeAreaView,
   ScrollView,
   Dimensions,
-  Image
+  Image,
+  Button
 } from 'react-native';
 import Home from './src/components/Home/Home';
 import SpotMap from './src/components/SpotMap/SpotMap';
@@ -24,6 +25,11 @@ export class App extends Component {
       .then(spots => this.props.populateSpots(spots))
       .catch(error => console.log(error));
   }
+
+  logoutUser = () => {
+    fetch('https://skate-spotter.herokuapp.com/api/v1/logout');
+    this.props.logout();
+  };
 
   render() {
     return <Drawer />;
@@ -52,6 +58,7 @@ const CustomDrawerComponent = props => {
       </View>
       <ScrollView>
         <DrawerItems {...props} />
+        <Button title="Log Out" onPress={this.logoutUser} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -75,7 +82,8 @@ export const mapStateToProps = state => ({
 });
 
 export const mapDispatchToProps = dispatch => ({
-  populateSpots: spots => dispatch(populateSpots(spots))
+  populateSpots: spots => dispatch(populateSpots(spots)),
+  logout: () => dispatch(logout())
 });
 
 export default connect(

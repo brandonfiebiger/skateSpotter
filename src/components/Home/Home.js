@@ -24,8 +24,8 @@ export class Home extends Component {
         let location = {
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
-          latitudeDelta: 12.0922,
-          longitudeDelta: 12.0421
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421
         };
         this.props.getLocation(location);
       },

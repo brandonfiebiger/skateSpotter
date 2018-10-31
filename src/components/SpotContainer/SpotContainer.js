@@ -26,18 +26,20 @@ export class SpotContainer extends Component {
 
   render() {
     return (
-      <ScrollView>
-        <View style={styles.spotContainer}>{this.displaySpotCards()}</View>
-      </ScrollView>
+      <View style={styles.spotContainer}>
+        <ScrollView contentContainerStyle={styles.scroll}>
+          <View>{this.displaySpotCards()}</View>
+        </ScrollView>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   spotContainer: {
-    flex: 1,
-    height: 500
-  }
+    flex: 1
+  },
+  contentContainerStyle: {}
 });
 
 export const mapStateToProps = state => ({
