@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import geolib from 'geolib';
 import conversions from 'conversions';
-
 import {
   View,
   Button,
