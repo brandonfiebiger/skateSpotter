@@ -5,7 +5,8 @@ import {
   SafeAreaView,
   ScrollView,
   Dimensions,
-  Image
+  Image,
+  Button
 } from 'react-native';
 import Home from './src/components/Home/Home';
 import SpotMap from './src/components/SpotMap/SpotMap';
