@@ -33,7 +33,7 @@ export class SpotCard extends Component {
           <Text style={[styles.description, styles.text]}>{description}</Text>
           <Text style={[styles.distance, styles.text]}>
             Distance From Me:{' '}
-            {Math.round(
+            {/* {Math.round(
               conversions(
                 geolib.getDistance(
                   {
@@ -46,7 +46,7 @@ export class SpotCard extends Component {
                 'miles'
               ) * 100
             ) / 100}{' '}
-            miles
+            miles */}
           </Text>
           <TouchableHighlight style={styles.routeButton}>
             <Button color="#f7f7f7" title="Route" />
@@ -59,12 +59,8 @@ export class SpotCard extends Component {
 
 const styles = StyleSheet.create({
   card: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 700,
+    height: 250,
     width: '100%',
-    marginTop: 30,
     marginBottom: 30
   },
   imageContainer: {
@@ -73,7 +69,6 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    flexDirection: 'column',
     fontSize: 5,
     height: '100%',
     width: '100%'
