@@ -6,17 +6,8 @@ import MapView from 'react-native-maps';
 import SpotContainer from '../SpotContainer/SpotContainer';
 
 export class SpotMap extends Component {
-  markerClick = () => {
-    console.log('marker clicked');
-  };
-
   render() {
     const { userLocation, spots } = this.props;
-
-    const marker = {
-      title: 'spot name',
-      description: 'This is a great spot...'
-    };
 
     const displayMarkers = spots.map((location, index) => {
       const fullLocation = {
@@ -28,31 +19,17 @@ export class SpotMap extends Component {
 
       return (
         <MapView.Marker
-          title="spot name"
-          description="This is a great spot"
+          description={location.description}
+          title={location.name}
           coordinate={fullLocation}
           key={index}
-        >
-          <MapView.Callout tooltip style={styles.customView}>
-            <TouchableHighlight
-              onPress={() => this.markerClick()}
-              underlayColor="#dddddd"
-            >
-              <View style={styles.calloutText}>
-                <Text>
-                  {marker.title}
-                  {marker.description}
-                </Text>
-              </View>
-            </TouchableHighlight>
-          </MapView.Callout>
-        </MapView.Marker>
+        />
       );
     });
 
     return (
       <View style={styles.mapContainer}>
-        <Header style={styles.header}>
+        <Header style={styles.header} transparent>
           <Left>
             <Icon
               name="menu"
