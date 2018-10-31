@@ -33,15 +33,20 @@ export class App extends Component {
 const CustomDrawerComponent = props => {
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ height: 150, backgroundColor: 'white' }}>
+      <View
+        style={{
+          height: 150,
+          backgroundColor: 'white',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
         <Image
           source={Avatar}
           style={{
-            height: 120,
-            width: 120,
-            borderRadius: 60,
-            justifyContent: 'center',
-            alignItems: 'center'
+            height: 80,
+            width: 80,
+            borderRadius: 40
           }}
         />
       </View>
