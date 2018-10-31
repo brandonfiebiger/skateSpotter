@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     fontSize: 5,
-    // justifyContent: 'space-around',
     height: '100%',
     width: '100%'
   },
