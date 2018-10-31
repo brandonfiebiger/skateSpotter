@@ -92,6 +92,16 @@ class SpotForm extends Component {
     const { description, selectedImage, name } = this.state;
     const { latitude, longitude } = this.props.userLocation;
 
+    fetch('https://skate-spotter.herokuapp.com/api/v1/new_spot', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: name.value,
+        description: description.value,
+        longitude: longitude,
+        latitude: latitude
+      })
+    })
+
     this.props.addSpot({
       description: description.value,
       photos: [selectedImage],
