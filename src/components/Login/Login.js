@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { View, Button, StyleSheet, TextInput } from 'react-native';
+import validate from '../../utils/validation';
 
 export default class Login extends Component {
   constructor() {
     super();
     this.state = {
-      email: {
+      userName: {
         value: '',
         valid: false,
         validationRules: {
-          isEmail: true
+          minLength: 6
         }
       },
       password: {
@@ -44,8 +45,8 @@ export default class Login extends Component {
   };
 
   checkForAllValid = () => {
-    const { email, password, passwordConfirmation } = this.state;
-    if (email.valid && password.valid && passwordConfirmation.valid) {
+    const { userName, password } = this.state;
+    if (userName.valid && password.valid) {
       this.setState({
         allValid: true
       });
@@ -56,18 +57,37 @@ export default class Login extends Component {
     }
   };
 
+  handleSubmit = () => {
+    const { userName, password } = this.state;
+
+    fetch('https://skate-spotter.herokuapp.com/api/v1/login', {
+      credentials: 'same-origin',
+      method: 'POST',
+      body: JSON.stringify({
+        name: userName.value,
+        password: password.value
+      }),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log(error));
+  }
+
   render() {
-    const { email, password, allValid } = this.state;
+    const { userName, password, allValid } = this.state;
 
     return (
       <View style={styles.view}>
         <View style={styles.textInputsContainer}>
           <Button title="Home" onPress={this.directToHome} />
           <TextInput
-            style={email.valid ? [styles.input, styles.valid] : styles.input}
-            value={email.value}
-            onChangeText={val => this.handleOnChange('email', val)}
-            placeholder="Email"
+            style={userName.valid ? [styles.input, styles.valid] : styles.input}
+            value={userName.value}
+            onChangeText={val => this.handleOnChange('userName', val)}
+            placeholder="User name"
           />
           <TextInput
             style={password.valid ? [styles.input, styles.valid] : styles.input}
