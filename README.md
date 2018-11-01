@@ -1,6 +1,6 @@
-# skateSpotter
+# SkateSpotter
 
-skateSpotter is a mobile application that allows skaters to see great skate spots nearby as well as add their own skate spots to their
+SkateSpotter is a mobile application that allows skaters to see great skate spots nearby as well as add their own skate spots to their
 surrounding area. This application was build with React Native, React Navigation and Redux on the front end and Python on the back end. 
 Jest and Enzyme were used for testing.
 
