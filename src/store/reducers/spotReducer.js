@@ -3,7 +3,7 @@ export const spotReducer = (state = [], action) => {
     case 'POPULATE_SPOTS':
       return [...action.spots]
     case 'ADD_SPOT':
-      return [...state, action.spot];
+      return [action.spot, ...state];
     default:
       return state;
   }
