@@ -13,9 +13,10 @@ import { connect } from 'react-redux';
 import SpotForm from './src/components/SpotForm/SpotForm';
 import SignUp from './src/components/SignUp/SignUp';
 import Login from './src/components/Login/Login';
-import { populateSpots } from './src/store/actions';
+import { populateSpots, logIn } from './src/store/actions';
 import { createDrawerNavigator, DrawerItems } from 'react-navigation';
 import Avatar from './src/assets/images/avatar-example.png';
+import LogOut from './src/components/LogOut/LogOut';
 
 export class App extends Component {
   componentDidMount() {
@@ -23,66 +24,44 @@ export class App extends Component {
       .then(response => response.json())
       .then(spots => this.props.populateSpots(spots))
       .catch(error => console.log(error));
+
+      fetch('https://skate-spotter.herokuapp.com/api/v1/skater_page')
+        .then(response => response.json())
+        .then(user => this.props.login(user))
+        .catch(error => console.log(error));
   }
 
-  logoutUser = () => {
-    fetch('https://skate-spotter.herokuapp.com/api/v1/logout');
-    this.props.logout();
-  };
-
   render() {
-    return <Drawer />;
+    return this.props.currentUser ? <LoggedInDrawer /> : <LoggedOutDrawer />
   }
 }
 
-const CustomDrawerComponent = props => {
-  return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View
-        style={{
-          height: 150,
-          backgroundColor: 'white',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}
-      >
-        <Image
-          source={Avatar}
-          style={{
-            height: 80,
-            width: 80,
-            borderRadius: 40
-          }}
-        />
-      </View>
-      <ScrollView>
-        <DrawerItems {...props} />
-        <Button title="Log Out" onPress={this.logoutUser} />
-      </ScrollView>
-    </SafeAreaView>
-  );
-};
-
-const Drawer = createDrawerNavigator(
+const LoggedOutDrawer = createDrawerNavigator (
   {
     Home: Home,
     'Spots Near Me': SpotMap,
     Login: Login,
     'Sign Up': SignUp,
-    'Spot It': SpotForm
-  },
+    
+  } 
+);
+
+const LoggedInDrawer = createDrawerNavigator(
   {
-    contentComponent: CustomDrawerComponent
+    'Spots Near Me': SpotMap,
+    'Spot It': SpotForm,
+    'Logout': LogOut
   }
 );
 
 export const mapStateToProps = state => ({
-  spots: state.spots
+  spots: state.spots,
+  currentUser: state.currentUser
 });
 
 export const mapDispatchToProps = dispatch => ({
   populateSpots: spots => dispatch(populateSpots(spots)),
-  logout: () => dispatch(logout())
+  login: (user) => dispatch(logIn(user))
 });
 
 export default connect(
