@@ -15,15 +15,15 @@ Jest and Enzyme were used for testing.
 
 ### Home Page
 
-![]('./src/assets/images/Home.png)
+<img src="src/assets/images/Home.png" width="375" />
 
 ### Spots Near Me Page
 
-![]('./src/assets/images/spot-map.png)
+<img src="src/assets/images/spot-map.png" width="375" />
 
 ### Spot It Page
 
-![]('./src/assets/images/half-pipe.png)
+<img src="src/assets/images/half-pipe.png" width="375" />
 
 #### Contributors: 
   * [Brandon Fiebiger](https://github.com/brandonfiebiger)
