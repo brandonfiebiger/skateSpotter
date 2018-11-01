@@ -112,6 +112,7 @@ class SpotForm extends Component {
           longitude,
           photo_url: selectedImage
         });
+        this.props.navigation.navigate('Spots Near Me');
       })
       .catch(error => console.log(error));
   };
