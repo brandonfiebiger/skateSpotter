@@ -13,6 +13,17 @@ Jest and Enzyme were used for testing.
 
 ## User Interface 
 
+### Home Page
+
+![]('./src/assets/images/Home.png)
+
+### Spots Near Me Page
+
+![]('./src/assets/images/spot-map.png)
+
+### Spot It Page
+
+![]('./src/assets/images/half-pipe.png)
 
 #### Contributors: 
   * [Brandon Fiebiger](https://github.com/brandonfiebiger)
