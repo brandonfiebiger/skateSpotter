@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { logout } from '../../store/actions';
+import CookieManager from 'react-native-cookies';
 
 export class LogOut extends Component {
 
@@ -16,7 +17,10 @@ export class LogOut extends Component {
     console.log("hello");
     fetch('https://skate-spotter.herokuapp.com/api/v1/logout')
     .then(response => response.json())
-    .then(data => console.log(data))
+    .then(data => {
+      console.log(data)
+      CookieManager.clearAll();
+      })
     .catch(error => console.log(error))
     this.props.logout();
     this.props.navigation.navigate('Home');
