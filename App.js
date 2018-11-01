@@ -27,7 +27,10 @@ export class App extends Component {
 
       fetch('https://skate-spotter.herokuapp.com/api/v1/skater_page')
         .then(response => response.json())
-        .then(user => this.props.login(user))
+        .then(user => {
+          this.props.login(user);
+          this.props.navigation.navigate('Spots Near Me');
+        })
         .catch(error => console.log(error));
   }
 
