@@ -36,9 +36,6 @@ export class SpotCard extends Component {
               {latitude: latitude, longitude: longitude }
             ), 'metres', 'miles') * 100)/ 100} miles */}
           </Text>
-          <TouchableHighlight style={styles.routeButton}>
-            <Button color="#f7f7f7" title="Route" />
-          </TouchableHighlight>
         </View>
       </View>
     );
@@ -65,18 +62,12 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%'
   },
-  routeButton: {
-    backgroundColor: 'black',
-    borderRadius: 10,
-    height: 35,
-    opacity: 0.8,
-    paddingBottom: 5,
-    width: 80
+  header: {
+    fontSize: 20
   },
-  header: {},
-  description: {},
-  distance: {},
-  text: {}
+  description: {
+    fontSize: 16
+  }
 });
 
 export const mapStateToProps = state => ({
