@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, Button, StyleSheet, TextInput } from 'react-native';
+import { View, Image, Button, StyleSheet, TextInput, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import { addSpot } from '../../store/actions';
 import ImagePicker from 'react-native-image-picker';
@@ -132,7 +132,9 @@ class SpotForm extends Component {
           style={styles.imageContainer}
           source={this.state.selectedImage}
         />
-        <Button title="Take A Photo" onPress={this.selectImageHandler} />
+        <TouchableHighlight style={styles.photoButton} >
+          <Button color='#f7f7f7' title="Take A Photo" onPress={this.selectImageHandler} />
+        </TouchableHighlight>
         <TextInput
           style={styles.nameInput}
           value={this.state.name}
@@ -145,11 +147,14 @@ class SpotForm extends Component {
           onChangeText={val => this.handleOnChange('description', val)}
           placeholder="Description"
         />
-        <Button
-          title="Add New Spot"
-          onPress={this.handleSubmit}
-          disabled={!this.state.allValid}
-        />
+        <TouchableHighlight style={styles.photoButton}>
+          <Button
+            title="Add New Spot"
+            onPress={this.handleSubmit}
+            disabled={!this.state.allValid}
+            color="#f7f7f7"
+            />
+        </TouchableHighlight>
       </View>
     );
   }
@@ -166,7 +171,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   imageContainer: {
     width: '100%',
@@ -188,7 +193,16 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderColor: 'black',
     borderWidth: 0.5
-  }
+  },
+  photoButton: {
+    backgroundColor: 'black',
+    borderRadius: 10,
+    height: 45,
+    marginTop: 20,
+    opacity: 0.85,
+    paddingTop: 3,
+    width: 175
+  },
 });
 
 export const mapStateToProps = state => ({
