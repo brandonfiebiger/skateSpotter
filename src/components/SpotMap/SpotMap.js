@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableHighlight, Text } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TouchableHighlight,
+  Text,
+  StatusBar
+} from 'react-native';
 import { connect } from 'react-redux';
 import { Header, Left, Icon } from 'native-base';
 import MapView from 'react-native-maps';
@@ -29,7 +35,7 @@ export class SpotMap extends Component {
 
     return (
       <View style={styles.mapContainer}>
-        <Header style={styles.header} transparent>
+        <Header style={styles.header}>
           <Left>
             <Icon
               name="menu"
