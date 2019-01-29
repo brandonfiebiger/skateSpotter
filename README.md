@@ -4,6 +4,8 @@ SkateSpotter is a mobile application that allows skaters to see great skate spot
 surrounding area. This application was build with React Native, React Navigation and Redux on the front end and Python on the back end. 
 Jest and Enzyme were used for testing.
 
+[Backend API](https://github.com/1powechri2/Skate-Spotter-BE)
+
 ### Getting Started (Via Simulator)
 
   * Clone down this repo.
@@ -28,3 +30,4 @@ Jest and Enzyme were used for testing.
 #### Contributors: 
   * [Brandon Fiebiger](https://github.com/brandonfiebiger)
   * [Kurt Miller](https://github.com/kmiller9393)
+  * [Chris Powell](https://github.com/1powechri2) (BackEnd contributor)
